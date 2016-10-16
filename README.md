@@ -42,6 +42,10 @@ randomHexColor();             // returns a random hex color.
 
 ## Changelog:
 
+**v0.02**:
+
+- Fixed a bug where RGB colors could be returned non-rounded even though 'rounding' was true.
+
 **v0.01**:
 
 - First release! 388 tests has been written and bidirectional conversions between HEX, RGB/RGBa, HSL/HSLa, HSV/HSB and HTML color names are supported in this initial release.
@@ -292,29 +296,90 @@ setInterval(() => document.body.style.backgroundColor = randomHexColor(), 100);
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
-### Random colors for other color systems
-Methods: `randomRgbColor()`, `randomHslColor()` and `randomHsvColor()` exists too, but they are identical to `randomHexColor()` except for the fact that they return colors from their respective color systems.
+### `#randomRgbColor()`
+
+*Generates a random RGB color and returns it.*
+
+**Signature:**
+
+```javascript
+randomRgbColor (): string
+```
+
+**Returns**:
+
+`string` - A random RGB color.
+
+#### Example
+```javascript
+setInterval(() => document.body.style.backgroundColor = randomRgbColor(), 100);
+
+// Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
+```
+
+### `#randomHslColor()`
+
+*Generates a random HSL color and returns it.*
+
+**Signature:**
+
+```javascript
+randomHslColor (): string
+```
+
+**Returns**:
+
+`string` - A random HSL color.
+
+#### Example
+```javascript
+setInterval(() => document.body.style.backgroundColor = randomHslColor(), 100);
+
+// Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
+```
+
+### `#randomHsvColor()`
+
+*Generates a random HSV color and returns it.*
+
+**Signature:**
+
+```javascript
+randomHsvColor (): string
+```
+
+**Returns**:
+
+`string` - A random HSV color.
+
+#### Example
+```javascript
+setInterval(() => document.body.style.backgroundColor = randomHsvColor(), 100);
+
+// Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
+```
+
 
 ### Other methods
 There's a lot of them. The above was the highlights. Everything is well-documented in the source code. Here's a quick overview of the methods that isn't included in this *readme*:
 
 - **`hslStringToHslTuple`:**
-	-	Converts a string-represented HSL color to a tuple.
+	-	Converts a string-represented HSL color to a tuple of the values.
 
 - **`hslToHsla`:**
 	-	Generates a HSLA color from a HSL color.
 
 - **`hslaStringToHslaTuple`:**
-	-	Converts a string-represented HSLa color to a tuple.
+	-	Converts a string-represented HSLa color to a tuple of the values.
 
 - **`hslToRgbTuple`:**
-	-	Converts the given HSL color to an RGB color and returns it as a tuple.
+	-	Converts the given HSL color to an RGB color and returns it as a tuple of the values.
 
 - **`hslToRgb`:**
 	-	Converts the given HSL color to an RGB color and returns it as a string.
 
 - **`hslaToRgbaTuple`:**
-	-	Converts the given HSLa color to an RGBa color and returns it as a tuple.
+	-	Converts the given HSLa color to an RGBa color and returns it as a tuple of the values.
 
 - **`hslaToRgba`:**
 	-	Converts the given HSLa color to an RGBa color and returns it as a string.
@@ -338,13 +403,13 @@ There's a lot of them. The above was the highlights. Everything is well-document
 	-	Generates a tuple-representation of an HSV/HSB color.
 
 - **`hsvToRgbTuple`:**
-	-	Converts an HSV/HSB color to an RGB color and returns it as a tuple.
+	-	Converts an HSV/HSB color to an RGB color and returns it as a tuple of the values.
 
 - **`hsvToRgb`:**
 	-	Converts a HSV color to an RGB color and returns it as a string.
 
 - **`hexToRgbTuple`:**
-	-	Generates a RGB version of a hex color and returns it as a tuple.
+	-	Generates a RGB version of a hex color and returns it as a tuple of the values.
 
 - **`hexToRgb`:**
 	-	Generates a RGB version of a hex color and returns it as a string.
@@ -362,13 +427,13 @@ There's a lot of them. The above was the highlights. Everything is well-document
 	-	Generates a HSL color from a hex color and returns it as a string.
 
 - **`rgbToHslTuple`:**
-	-	Generates a HSL color from a RGB color and returns it as a tuple.
+	-	Generates a HSL color from a RGB color and returns it as a tuple of the values.
 
 - **`rgbToHsl`:**
 	-	Generates a HSL color from a RGB color and returns it as a string.
 
 - **`rgbToHsvTuple`:**
-	-	Converts an RGB color to an HSV/HSB color and returns it as a tuple.
+	-	Converts an RGB color to an HSV/HSB color and returns it as a tuple of the values.
 
 - **`rgbToHsv`:**
 	-	Converts an RGB color to an HSV/HSB color and returns it as a string.

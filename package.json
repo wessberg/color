@@ -1,6 +1,6 @@
 {
 	"name": "colorutilities",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "A library of helper methods for working with colors. Comes with flow typings and tree-shakeable modules.",
 	"main": "colorutilities.js",
 	"jsnext:main": "native.js",

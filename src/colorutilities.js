@@ -242,7 +242,7 @@ export function hslToRgbTuple (hsl: string, rounding: boolean = true): [number, 
 	// If there is no saturation, we only need to multiply the lightness by 255, the maximum span of the RGB color space.
 	if (s === 0) {
 		r = g = b = l * 255;
-		return [r, g, b];
+		return rounding ? [Math.round(r), Math.round(g), Math.round(b)] : [r, g, b];
 	}
 
 	// Depending on whether or not the lightness is less than 0.5 (50%), different formulas should be used.
