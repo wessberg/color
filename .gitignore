@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+flow-typed
+.DS_Store
+.babelrc
+.eslintrc.js
+jsconfig.json
+.idea
+/typed.js
+/native.js
+/colorutilities.js

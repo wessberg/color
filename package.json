@@ -1,0 +1,53 @@
+{
+	"name": "colorutilities",
+	"version": "0.0.1",
+	"description": "A library of helper methods for working with colors. Comes with flow typings and tree-shakeable modules.",
+	"main": "colorutilities.js",
+	"jsnext:main": "native.js",
+	"author": "Frederik Wessberg",
+	"license": "ISC",
+	"scripts": {
+		"test": "mocha --require mochahook.js --compilers js:babel-register src/test/**/*.*",
+		"build:es5": "NODE_ENV=production rollup -c rollup.dist.config.js -o colorutilities.js",
+		"build:native": "NODE_ENV=production rollup -c rollup.native.config.js -o native.js",
+		"build:typed": "cp src/colorutilities.js typed.js",
+		"build:all": "npm run build:es5 & npm run build:native & npm run build:typed & wait"
+	},
+	"keywords": [
+		"color",
+		"operations",
+		"utilities",
+		"hsl",
+		"rgb",
+		"hex",
+		"darken",
+		"lighten",
+		"desaturate",
+		"saturate",
+		"random"
+	],
+	"devDependencies": {
+		"babel-cli": ">=6.11.4",
+		"babel-core": ">=6.6.5",
+		"babel-eslint": "^6.1.2",
+		"babel-loader": ">=6.2.4",
+		"babel-polyfill": ">=6.6.1",
+		"babel-plugin-transform-flow-strip-types": ">=6.8.0",
+		"babel-preset-es2015": ">=6.13.2",
+		"babel-preset-stage-1": ">=6.13.0",
+		"babel-register": ">=6.7.2",
+		"eslint": "^3.0.1",
+		"eslint-plugin-flowtype": ">=2.7.1",
+		"rollup": "^0.34.10",
+		"rollup-plugin-babel": "^2.6.1",
+		"rollup-plugin-commonjs": "^3.3.1",
+		"rollup-plugin-filesize": "^0.4.4",
+		"rollup-plugin-node-resolve": "^2.0.0",
+		"rollup-plugin-uglify": "^1.0.1",
+		"uglify-js": "github:mishoo/UglifyJS2#harmony",
+		"chai": "^3.5.0",
+		"eslint-plugin-babel": "^3.3.0",
+		"eslint-plugin-esplus": "^1.0.0",
+		"mocha": "^3.0.2"
+	}
+}
