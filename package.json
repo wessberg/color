@@ -10,7 +10,7 @@
 		"test": "mocha --require mochahook.js --compilers js:babel-register src/test/**/*.*",
 		"build:es5": "NODE_ENV=production rollup -c rollup.dist.config.js -o colorutilities.js",
 		"build:native": "NODE_ENV=production rollup -c rollup.native.config.js -o native.js",
-		"build:typed": "cp src/colorutilities.js typed.js",
+		"build:typed": "cp src/colorutilities.js typed.js && cp src/colorutilities.js colorutilities.js.flow && cp src/colorutilities.js native.js.flow",
 		"build:all": "npm run build:es5 & npm run build:native & npm run build:typed & wait"
 	},
 	"keywords": [
