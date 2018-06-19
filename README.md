@@ -1,13 +1,20 @@
-# colorutilities [![NPM version][npm-image]][npm-url]
-> A library of well-tested helper methods for working with colors. Comes with flow typings and tree-shakeable modules.
+# @wessberg/color
+[![NPM version][npm-version-image]][npm-version-url]
+[![License-mit][license-mit-image]][license-mit-url]
+
+<a href="https://www.patreon.com/bePatron?u=11315442"><img height="30" src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" /></a>
+
+[license-mit-url]: https://opensource.org/licenses/MIT
+[license-mit-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[npm-version-url]: https://www.npmjs.com/package/@wessberg/color
+[npm-version-image]: https://badge.fury.io/js/%40wessberg%2Fcolor.svg
 
 ## Installation
-Simply do: `npm install colorutilities`.
+Simply do: `npm install @wessberg/color`.
 
-## What is it?
+## Description
 
-This is a collection of helper methods for working with colors and converting between color systems. Simple methods are provided such as `toHex()`, `toHsl()`, `toHsv()`, `toRgb()`, `saturate()`, `lighten()` and much more.
-
+This is a collection of helper functions for working with colors and converting between color systems. Simple functions are provided such as `toHex()`, `toHsl()`, `toHsv()`, `toRgb()`, `saturate()`, `lighten()` and much more.
 The library takes care of figuring out which color system your input string comes from, so you can just use the library and not care about the rest.
 
 Supported color systems:
@@ -17,16 +24,14 @@ Supported color systems:
 - HSL/HSLa
 - HTML color names.
 
-Beyond that, everything is typed with [Flow](https://flowtype.org/) and every method is exported as separate modules. This makes this library very easy to tree-shake and incorporate in your rollup or webpack build.
-
-At the time of writing, 388 tests has been written for the library methods. I'd say you can use it in production today.
+At the time of writing, 389 tests has been written for the library methods. I'd say you can use it in production today.
 
 Have fun!
 
 ## Examples
 
-```javascript
-import {toHsl, lighten, saturate, isLight, randomHexColor} from "colorutilities";
+```typescript
+import {toHsl, lighten, saturate, isLight, randomHexColor} from "@wessberg/color";
 
 toHsl("#DC143C")          // returns 'hsl(348, 83%, 47%)'
 toHsl("DC143C")           // returns 'hsl(348, 83%, 47%)'
@@ -40,28 +45,16 @@ isLight("rgb(234, 205, 244)") // returns true, that's a pretty light color.
 randomHexColor();             // returns a random hex color.
 ```
 
-## Changelog:
-
-**v0.02**:
-
-- Fixed a bug where RGB colors could be returned non-rounded even though 'rounding' was true.
-
-**v0.01**:
-
-- First release! 388 tests has been written and bidirectional conversions between HEX, RGB/RGBa, HSL/HSLa, HSV/HSB and HTML color names are supported in this initial release.
-
 ## Usage
 Import it in your project like this:
 
-```javascript
-import {saturate, toRgb, ...} from "colorutilities"; // (standard) Transpiled to ES5.
-// or
-
-import {saturate, toRgb, ...} from "colorutilities/native"; // Transpiled to ES5 except for native ES-modules.
-// or
-
-import {saturate, toRgb, ...} from "colorutilities/typed"; // Flow typings, ES-modules, pretranspile.
+```typescript
+import {saturate, toRgb, ...} from "@wessberg/color";
 ```
+
+## Backers
+
+[Become a backer](https://www.patreon.com/bePatron?c=1770586) and get your name, logo, and link to your site listed here. Your help is greatly appreciated!
 
 ## Documentation
 
@@ -71,7 +64,7 @@ import {saturate, toRgb, ...} from "colorutilities/typed"; // Flow typings, ES-m
 
 **Signature:**
 
-```javascript
+```typescript
 isLight (color: string): boolean
 ```
 
@@ -84,7 +77,7 @@ isLight (color: string): boolean
 `boolean`         - Returns true if the color is light, false otherwise.
 
 #### Example
-```javascript
+```typescript
 isLight("rgb(234, 205, 244)") // returns true, that's a pretty light color.
 ```
 
@@ -94,7 +87,7 @@ isLight("rgb(234, 205, 244)") // returns true, that's a pretty light color.
 
 **Signature:**
 
-```javascript
+```typescript
 lighten (color: string, percentage: number = 10): string
 ```
 
@@ -109,7 +102,7 @@ lighten (color: string, percentage: number = 10): string
 `string` - The lightened/darkened color.
 
 #### Example
-```javascript
+```typescript
 lighten("#DDACED", 10) // lightens the color 10% and returns the new value: #EACDF4.
 lighten("#DDACED", -90) // darkens the color 90% and returns the new value: #1B0721.
 ```
@@ -120,7 +113,7 @@ lighten("#DDACED", -90) // darkens the color 90% and returns the new value: #1B0
 
 **Signature:**
 
-```javascript
+```typescript
 saturate (color: string, percentage: number = 10): string
 ```
 
@@ -135,7 +128,7 @@ saturate (color: string, percentage: number = 10): string
 `string` - The saturated/desaturated color.
 
 #### Example
-```javascript
+```typescript
 saturate("brown", 100)  // saturates the HTML color 'brown' an additional 100%.
 saturate("brown", -100) // desaturates the HTML color 'brown' 100%.
 ```
@@ -146,7 +139,7 @@ saturate("brown", -100) // desaturates the HTML color 'brown' 100%.
 
 **Signature:**
 
-```javascript
+```typescript
 toHex (color: string): string
 ```
 
@@ -165,7 +158,7 @@ toHex (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into a hex color.
 
 #### Example
-```javascript
+```typescript
 toHex("#DC143C")          // returns '#DC143C'
 toHex("DC143C")           // returns '#DC143C'
 toHex("rgb(220, 20, 60)") // returns '#DC143C'
@@ -179,7 +172,7 @@ toHex("hsb(348, 91, 86)") // returns '#DC143C'
 
 **Signature:**
 
-```javascript
+```typescript
 toRgb (color: string): string
 ```
 
@@ -198,7 +191,7 @@ toRgb (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into an RGB color.
 
 #### Example
-```javascript
+```typescript
 toRgb("#DC143C")          // returns 'rgb(220, 20, 60)'
 toRgb("DC143C")           // returns 'rgb(220, 20, 60)'
 toRgb("rgb(220, 20, 60)") // returns 'rgb(220, 20, 60)'
@@ -212,7 +205,7 @@ toRgb("hsb(348, 91, 86)") // returns 'rgb(220, 20, 60)'
 
 **Signature:**
 
-```javascript
+```typescript
 toRgb (color: string): string
 ```
 
@@ -231,7 +224,7 @@ toRgb (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into an HSL color.
 
 #### Example
-```javascript
+```typescript
 toHsl("hsl(348, 83%, 47%)") // returns 'hsl(348, 83%, 47%)'
 toHsl("#DC143C")            // returns 'hsl(348, 83%, 47%)'
 toHsl("DC143C")             // returns 'hsl(348, 83%, 47%)'
@@ -246,7 +239,7 @@ toHsl("hsb(348, 91, 86)")   // returns 'hsl(348, 83%, 47%)'
 
 **Signature:**
 
-```javascript
+```typescript
 toRgb (color: string): string
 ```
 
@@ -265,7 +258,7 @@ toRgb (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into an HSVB/HSB color.
 
 #### Example
-```javascript
+```typescript
 toHsv("hsb(348, 91, 86)")   // returns 'hsb(348, 91, 86)'
 toHsv("hsv(348, 91, 86)")   // returns 'hsv(348, 91, 86)'
 toHsv("hsl(348, 83%, 47%)") // returns 'hsb(348, 91, 86)'
@@ -281,7 +274,7 @@ toHsv("crimson")            // returns 'hsb(348, 91, 86)'
 
 **Signature:**
 
-```javascript
+```typescript
 randomHexColor (): string
 ```
 
@@ -290,7 +283,7 @@ randomHexColor (): string
 `string` - A random hex color. Always starts with '#'.
 
 #### Example
-```javascript
+```typescript
 setInterval(() => document.body.style.backgroundColor = randomHexColor(), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
@@ -302,7 +295,7 @@ setInterval(() => document.body.style.backgroundColor = randomHexColor(), 100);
 
 **Signature:**
 
-```javascript
+```typescript
 randomRgbColor (): string
 ```
 
@@ -311,7 +304,7 @@ randomRgbColor (): string
 `string` - A random RGB color.
 
 #### Example
-```javascript
+```typescript
 setInterval(() => document.body.style.backgroundColor = randomRgbColor(), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
@@ -323,7 +316,7 @@ setInterval(() => document.body.style.backgroundColor = randomRgbColor(), 100);
 
 **Signature:**
 
-```javascript
+```typescript
 randomHslColor (): string
 ```
 
@@ -332,7 +325,7 @@ randomHslColor (): string
 `string` - A random HSL color.
 
 #### Example
-```javascript
+```typescript
 setInterval(() => document.body.style.backgroundColor = randomHslColor(), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
@@ -344,7 +337,7 @@ setInterval(() => document.body.style.backgroundColor = randomHslColor(), 100);
 
 **Signature:**
 
-```javascript
+```typescript
 randomHsvColor (): string
 ```
 
@@ -353,7 +346,7 @@ randomHsvColor (): string
 `string` - A random HSV color.
 
 #### Example
-```javascript
+```typescript
 setInterval(() => document.body.style.backgroundColor = randomHsvColor(), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
@@ -446,6 +439,3 @@ There's a lot of them. The above was the highlights. Everything is well-document
 
 - **`randomHsvColor`:**
 	-	Generates a random HSV/HSB color and returns it.
-
-[npm-url]: https://npmjs.org/package/colorutilities
-[npm-image]: https://badge.fury.io/js/colorutilities.svg
