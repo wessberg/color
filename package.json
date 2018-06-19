@@ -38,14 +38,11 @@
 	},
 	"keywords": [
 		"color",
-		"operations",
-		"utilities",
 		"hsl",
 		"rgb",
 		"hex",
 		"darken",
 		"lighten",
-		"desaturate",
 		"saturate",
 		"random"
 	],
