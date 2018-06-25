@@ -499,7 +499,7 @@ export function toHex (color: string): string {
 	}
 
 	else if (color.slice(0, 4) === "hsla") {
-		return rgbaToHex(hslaToRgba(color));
+		return rgbaToHex(hslaToRgba(color), "white");
 	}
 
 	else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
@@ -507,7 +507,7 @@ export function toHex (color: string): string {
 	}
 
 	else if (color.slice(0, 4) === "rgba") {
-		return rgbaToHex(color);
+		return rgbaToHex(color, "white");
 	}
 
 	else if (color.slice(0, 3) === "rgb") {
@@ -590,7 +590,7 @@ export function toRgb (color: string): string {
 	}
 
 	else if (color.slice(0, 4) === "rgba") {
-		return hexToRgb(rgbaToHex(color));
+		return hexToRgb(rgbaToHex(color, "white"));
 	}
 
 	else if (color.slice(0, 3) === "rgb") {
@@ -773,7 +773,7 @@ export function toHsl (color: string): string {
 	}
 
 	else if (color.slice(0, 4) === "rgba") {
-		return hexToHsl(rgbaToHex(color));
+		return hexToHsl(rgbaToHex(color, "white"));
 	}
 
 	else if (color.slice(0, 3) === "rgb") {
@@ -862,7 +862,7 @@ export function toHsv (color: string): string {
 	}
 
 	else if (color.slice(0, 4) === "hsla") {
-		return rgbToHsv(hexToRgb(rgbaToHex(hslaToRgba(color))));
+		return rgbToHsv(hexToRgb(rgbaToHex(hslaToRgba(color), "white")));
 	}
 
 	else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
@@ -872,7 +872,7 @@ export function toHsv (color: string): string {
 	}
 
 	else if (color.slice(0, 4) === "rgba") {
-		return rgbToHsv(hexToRgb(rgbaToHex(color)));
+		return rgbToHsv(hexToRgb(rgbaToHex(color, "white")));
 	}
 
 	else if (color.slice(0, 3) === "rgb") {

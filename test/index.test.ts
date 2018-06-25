@@ -568,7 +568,7 @@ test("#toHex() => Converts RGB colors to hex values. #3", t => {
 });
 
 test("#toHex() => Converts RGBa colors to hex values. #1", t => {
-	t.deepEqual(toHex("rgba(88, 100, 119, .5)"), "#586477");
+	t.deepEqual(toHex("rgba(88, 100, 119, .5)"), "#abb1bb");
 });
 
 test("#toHex() => Converts HSL colors to hex values. #1", t => {
@@ -711,6 +711,10 @@ test("#toRgb() => Converts HTML color names to RGB values. #2", t => {
 
 test("#toRgb() => Converts HSL colors to RGB colors. #1", t => {
 	t.deepEqual(toRgb("hsl(96, 41%, 78%)"), "rgb(194, 222, 176)");
+});
+
+test("#toRgb() => Converts RGBa colors to RGB colors. #1", t => {
+	t.deepEqual(toRgb("rgba(88, 100, 119, .5)"), "rgb(171, 177, 187)");
 });
 
 test("#toRgb() => Converts HSL colors to RGB colors. #2", t => {

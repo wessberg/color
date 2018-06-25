@@ -49,12 +49,21 @@ randomHexColor();             // returns a random hex color.
 Import it in your project like this:
 
 ```typescript
-import {saturate, toRgb, ...} from "@wessberg/color";
+import {saturate, toRgb, toHex, ...} from "@wessberg/color";
 ```
 
 ## Backers
 
 [Become a backer](https://www.patreon.com/bePatron?c=1770586) and get your name, logo, and link to your site listed here. Your help is greatly appreciated!
+
+## Converting from RGBa to color systems without alpha channels
+
+Many color system conversion libraries will discard the alpha channel when converting from colors that has an alpha channel.
+This means that converting from, say, `rgba(0,0,0,.5)` to RGB would normally become `rgb(0,0,0)`, but that is far from the same
+color, unless it is painted against a pure black background.
+
+This library, however, will assume a white background for such conversions (such as is the default on the web) and thus generate colors
+that look identical to the RGBa color for all color systems, as long as they are painted against a white background.
 
 ## Documentation
 
