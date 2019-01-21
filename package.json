@@ -1,6 +1,6 @@
 {
 	"name": "@wessberg/color",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"description": "A library of helper methods for working with colors.",
 	"repository": {
 		"type": "git",
