@@ -1,4 +1,4 @@
-<img alt="Logo for @wessberg/color" src="https://raw.githubusercontent.com/wessberg/color/master/documentation/asset/logo.png" height="200"></img><br>
+<img alt="Logo for @wessberg/color" src="https://raw.githubusercontent.com/wessberg/color/master/documentation/asset/logo.png" height="100"></img><br>
 <a href="https://npmcharts.com/compare/@wessberg/color?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/%40wessberg%2Fcolor.svg" height="20"></img></a>
 <a href="https://david-dm.org/wessberg/color"><img alt="Dependencies" src="https://img.shields.io/david/wessberg/color.svg" height="20"></img></a>
 <a href="https://www.npmjs.com/package/@wessberg/color"><img alt="NPM Version" src="https://badge.fury.io/js/%40wessberg%2Fcolor.svg" height="20"></img></a>
