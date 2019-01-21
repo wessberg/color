@@ -9,32 +9,35 @@
 	"bugs": {
 		"url": "https://github.com/wessberg/color/issues"
 	},
+	"files": [
+		"dist/**/*.*"
+	],
 	"scripts": {
-		"test": "NODE_ENV=TEST ava",
-		"changelog:generate": "conventional-changelog --outfile CHANGELOG.md --release-count 0",
-		"readme:badges": "node node_modules/@wessberg/ts-config/readme/badge/helper/add-badges.js",
-		"readme:refresh": "npm run changelog:generate && npm run readme:badges",
-		"commit:readme": "npm run readme:refresh && git commit -am \"Bumped version\" --no-verify || true",
-		"clean:dist": "rm -r -f dist",
-		"clean:compiled": "rm -r -f compiled",
+		"generate:readme": "scaffold readme",
+		"generate:license": "scaffold license",
+		"generate:contributing": "scaffold contributing",
+		"generate:coc": "scaffold coc",
+		"generate:changelog": "standard-changelog --first-release",
+		"generate:all": "npm run generate:license & npm run generate:contributing & npm run generate:coc & npm run generate:readme  & npm run generate:changelog",
+		"update": "ncu -ua && npm update && npm install",
+		"lint": "tsc --noEmit && tslint -c tslint.json --project tsconfig.json",
+		"clean:dist": "rm -rf dist",
+		"clean:compiled": "rm -rf compiled",
 		"clean": "npm run clean:dist && npm run clean:compiled",
-		"tsc:dist:cjs": "tsc --module commonjs --outDir dist/cjs -p tsconfig.dist.json",
-		"tsc:dist:es2015": "tsc --module es2015 --outDir dist/es2015 -p tsconfig.dist.json",
+		"tsc:cjs": "tsc --module commonjs --outDir dist/cjs -p tsconfig.dist.json",
 		"tsc:test": "tsc --module commonjs --target es2017 --sourceMap",
-		"build:cjs": "npm run tsc:dist:cjs",
-		"build:es2015": "npm run tsc:dist:es2015",
-		"prebuild": "npm run clean",
-		"build": "npm run build:cjs & npm run build:es2015",
-		"tslint": "tslint -c tslint.json -p tsconfig.json",
-		"validate": "npm run tslint && npm run test",
+		"tsc:esm": "tsc --module es2015 --outDir dist/esm -p tsconfig.dist.json",
 		"pretest": "npm run clean:compiled && npm run tsc:test",
+		"test": "NODE_ENV=TEST ava",
 		"posttest": "npm run clean:compiled",
-		"prepublishOnly": "npm run validate && npm run build",
-		"precommit": "npm run tslint && exit 0",
-		"prepush": "npm run validate && exit 0",
-		"publish:major": "npm version major && npm run commit:readme && git push --no-verify && npm publish",
-		"publish:minor": "npm version minor && npm run commit:readme && git push --no-verify && npm publish",
-		"publish:patch": "npm version patch && npm run commit:readme && git push --no-verify && npm publish"
+		"prebuild": "npm run clean:dist",
+		"build": "npm run tsc:cjs & npm run tsc:esm",
+		"prepare": "npm run build",
+		"publish:before": "NODE_ENV=production npm run lint && NODE_ENV=production npm run prepare && npm run generate:all && git add . && ((git commit -am \"Bumped version\") || true) && ((git push) || true)",
+		"publish:after": "git push && npm publish",
+		"publish:patch": "npm run publish:before && npm version patch && npm run publish:after",
+		"publish:minor": "npm run publish:before && npm version minor && npm run publish:after",
+		"publish:major": "npm run publish:before && npm version major && npm run publish:after"
 	},
 	"keywords": [
 		"color",
@@ -51,24 +54,43 @@
 		"email": "frederikwessberg@hotmail.com",
 		"url": "https://github.com/wessberg"
 	},
+	"license": "MIT",
 	"devDependencies": {
-		"@wessberg/ts-config": "0.0.27",
-		"ava": "^0.25.0",
-		"conventional-changelog-cli": "^2.0.1",
-		"husky": "^0.14.3",
-		"tslint": "^5.10.0",
-		"typescript": "^2.9.2"
-	},
-	"dependencies": {
-		"tslib": "^1.9.2"
+		"@wessberg/scaffold": "^1.0.5",
+		"@wessberg/ts-config": "0.0.38",
+		"ava": "^1.1.0",
+		"tslint": "^5.12.1",
+		"typescript": "^3.2.4",
+		"standard-changelog": "^2.0.6",
+		"prettier": "^1.16.0",
+		"pretty-quick": "^1.10.0",
+		"husky": "^1.3.1"
 	},
 	"main": "./dist/cjs/index.js",
-	"module": "./dist/es2015/index.js",
-	"browser": "./dist/es2015/index.js",
-	"types": "./dist/es2015/index.d.ts",
-	"typings": "./dist/es2015/index.d.ts",
-	"es2015": "./dist/es2015/index.js",
+	"module": "./dist/esm/index.js",
+	"browser": "./dist/esm/index.js",
+	"types": "./dist/esm/index.d.ts",
+	"typings": "./dist/esm/index.d.ts",
+	"es2015": "./dist/esm/index.js",
 	"engines": {
 		"node": ">=9.0.0"
+	},
+	"scaffold": {
+		"patreonUserId": "11315442",
+		"logo": "https://raw.githubusercontent.com/wessberg/color/master/documentation/asset/logo.png",
+		"contributorMeta": {
+			"Frederik Wessberg": {
+				"imageUrl": "https://avatars2.githubusercontent.com/u/20454213?s=460&v=4",
+				"role": "Maintainer",
+				"twitterHandle": "FredWessberg",
+				"isCocEnforcer": true
+			}
+		},
+		"backers": []
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "pretty-quick --staged"
+		}
 	}
 }

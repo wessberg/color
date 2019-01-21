@@ -1,7 +1,56 @@
-import {test} from "ava";
-import {hexToHsl, hexToHsla, hexToHslaTuple, hexToHslTuple, hexToRgb, hexToRgbTuple, hslaStringToHslaTuple, hslaToHsl, hslaToRgba, hslaToRgbaTuple, hslStringToHslTuple, hslToHsla, hslToRgb, hslToRgbTuple, hsvStringToHsvTuple, hsvToRgb, hsvToRgbTuple, isLight, lighten, lightenHex, lightenHsl, lightenHsla, lightenHsv, lightenRgb, lightenRgba, randomHexColor, randomHslColor, randomHsvColor, randomRgbColor, rgbaStringToRgbaTuple, rgbaToHex, rgbStringToRgbTuple, rgbToHex, rgbToHsl, rgbToHslTuple, rgbToHsv, rgbToHsvTuple, saturate, saturateHex, saturateHsl, saturateHsla, saturateHsv, saturateRgb, saturateRgba, toHex, toHsl, toHsv, toRgb} from "../src/index";
+import test from "ava";
+import {
+	hexToHsl,
+	hexToHsla,
+	hexToHslaTuple,
+	hexToHslTuple,
+	hexToRgb,
+	hexToRgbTuple,
+	hslaStringToHslaTuple,
+	hslaToHsl,
+	hslaToRgba,
+	hslaToRgbaTuple,
+	hslStringToHslTuple,
+	hslToHsla,
+	hslToRgb,
+	hslToRgbTuple,
+	hsvStringToHsvTuple,
+	hsvToRgb,
+	hsvToRgbTuple,
+	isLight,
+	lighten,
+	lightenHex,
+	lightenHsl,
+	lightenHsla,
+	lightenHsv,
+	lightenRgb,
+	lightenRgba,
+	randomHexColor,
+	randomHslColor,
+	randomHsvColor,
+	randomRgbColor,
+	rgbaStringToRgbaTuple,
+	rgbaToHex,
+	rgbStringToRgbTuple,
+	rgbToHex,
+	rgbToHsl,
+	rgbToHslTuple,
+	rgbToHsv,
+	rgbToHsvTuple,
+	saturate,
+	saturateHex,
+	saturateHsl,
+	saturateHsla,
+	saturateHsv,
+	saturateRgb,
+	saturateRgba,
+	toHex,
+	toHsl,
+	toHsv,
+	toRgb
+} from "../src/index";
 
-// tslint:disable:no-magic-numbers
+// tslint:disable
 
 test("#hslStringToHslTuple() => Throws an exception if the first argument is not of type 'string'", t => {
 	// @ts-ignore
@@ -41,11 +90,11 @@ test("#hslaStringToHslaTuple() => Throws an exception if the first argument is n
 	t.throws(() => hslaStringToHslaTuple(null));
 });
 
-test("#hslaStringToHslaTuple() => Throws an exception if the 'hue' property of the 'hsla' color isn't valid.", t => {
+test("#hslaStringToHslaTuple() => Throws an exception if the 'hue' property of the 'hsla' color isn't valid. #1", t => {
 	t.throws(() => hslaStringToHslaTuple("hsla(false, 50%, 100%, 1)"));
 });
 
-test("#hslaStringToHslaTuple() => Throws an exception if the 'hue' property of the 'hsla' color isn't valid.", t => {
+test("#hslaStringToHslaTuple() => Throws an exception if the 'hue' property of the 'hsla' color isn't valid. #2", t => {
 	t.throws(() => hslaStringToHslaTuple("hsla(30, false, 100%, 1)"));
 });
 
@@ -320,15 +369,12 @@ test("#rgbaStringToRgbaTuple() => Converts string representations of RGBa colors
 });
 
 test("#rgbToHex() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => rgbToHex(null));
-
 });
 
 test("#rgbToHex() => Throws an exception if the first argument is not a proper RGB color", t => {
 	t.throws(() => rgbToHex("rgb(true, false, false)"));
-
 });
 
 test("#rgbToHex() => Converts RGB colors to hex colors. #1", t => {
@@ -350,19 +396,15 @@ test("#rgbToHex() => Converts RGB colors to hex colors. #4", t => {
 test("#rgbaToHex() => Throws an exception if the first argument is not of type 'string'", t => {
 	// @ts-ignore
 	t.throws(() => rgbaToHex(null));
-
 });
 
 test("#rgbaToHex() => Throws an exception if the first argument is not a proper RGBa color", t => {
-
 	t.throws(() => rgbaToHex("rgba(true, false, false, false)"));
-
 });
 
 test("#rgbaToHex() => Throws an exception if the second argument is given but is not a string", t => {
 	// @ts-ignore
 	t.throws(() => rgbaToHex("rgba(10, 50, 80, 1)", false));
-
 });
 
 test("#rgbaToHex() => Converts RGBa colors to hex colors. #1", t => {
@@ -390,20 +432,16 @@ test("#rgbaToHex() => Converts RGBa colors to hex colors including interpolation
 });
 
 test("#hsvStringToHsvTuple() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hsvStringToHsvTuple(null));
-
 });
 
 test("#hsvStringToHsvTuple() => Throws an exception if the first argument is not a proper HSV/HSB color. #1", t => {
 	t.throws(() => hsvStringToHsvTuple("hsb(50, 100, false)"));
-
 });
 
 test("#hsvStringToHsvTuple() => Throws an exception if the first argument is not a proper HSV/HSB color. #2", t => {
 	t.throws(() => hsvStringToHsvTuple("hsv(50, 100, false)"));
-
 });
 
 test("#hsvStringToHsvTuple() => Generates tuple representations of HSV/HSB colors from HSV/HSB strings. #1", t => {
@@ -428,22 +466,16 @@ test("#hsvStringToHsvTuple() => Generates tuple representations of HSV/HSB color
 });
 
 test("#hsvToRgbTuple() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hsvToRgbTuple(null));
-
 });
 
 test("#hsvToRgbTuple() => Throws an exception if the first argument is not a proper HSV/HSB color. #1", t => {
-
 	t.throws(() => hsvToRgbTuple("hsb(50, 100, false)"));
-
 });
 
 test("#hsvToRgbTuple() => Throws an exception if the first argument is not a proper HSV/HSB color. #2", t => {
-
 	t.throws(() => hsvToRgbTuple("hsv(50, 100, false)"));
-
 });
 
 test("#hsvToRgbTuple() => Generates tuple representations of RGB colors from HSV/HSB strings. #1", t => {
@@ -468,22 +500,16 @@ test("#hsvToRgbTuple() => Generates tuple representations of RGB colors from HSV
 });
 
 test("#hsvToRgb() =>Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hsvToRgb(null));
-
 });
 
 test("#hsvToRgb() =>Throws an exception if the first argument is not a proper HSV/HSB color. #1", t => {
-
 	t.throws(() => hsvToRgb("hsb(50, 100, false)"));
-
 });
 
 test("#hsvToRgb() =>Throws an exception if the first argument is not a proper HSV/HSB color. #2", t => {
-
 	t.throws(() => hsvToRgb("hsv(50, 100, false)"));
-
 });
 
 test("#hsvToRgb() =>Generates RGB colors from HSV/HSB strings. #1", t => {
@@ -499,27 +525,20 @@ test("#hsvToRgb() =>Generates RGB colors from HSV/HSB strings. #3", t => {
 });
 
 test("#toHex() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => toHex(null));
-
 });
 
 test("#toHex() => Throws an exception if the first argument is not a proper color. #1", t => {
-
 	t.throws(() => toHex("foobar"));
-
 });
 
 test("#toHex() => Throws an exception if the first argument is not a proper color. #2", t => {
-
 	t.throws(() => toHex("#1234"));
-
 });
 
 test("#toHex() => Throws an exception if the first argument is not a proper color. #3", t => {
 	t.throws(() => toHex("1234"));
-
 });
 
 test("#toHex() => Throws an exception if the first argument is not a proper color. #4", t => {
@@ -528,7 +547,6 @@ test("#toHex() => Throws an exception if the first argument is not a proper colo
 
 test("#toHex() => Throws an exception if the first argument is not a proper color. #5", t => {
 	t.throws(() => toHex("hsl(false, rgb, true)"));
-
 });
 
 test("#toHex() => returns given hex codes just as they were if they start with a '#' and is otherwise valid. #1", t => {
@@ -596,15 +614,12 @@ test("#toHex() => Converts HSV/HSB colors to hex values. #3", t => {
 });
 
 test("#hexToRgbTuple() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hexToRgbTuple(null));
-
 });
 
 test("#hexToRgbTuple() => Throws an exception if the first argument is not a proper hex color.", t => {
 	t.throws(() => hexToRgbTuple("foobar"));
-
 });
 
 test("#hexToRgbTuple() => Generates RGB tuples from hex strings. #1", t => {
@@ -629,14 +644,12 @@ test("#hexToRgbTuple() => Generates RGB tuples from hex strings. #3", t => {
 });
 
 test("#hexToRgb() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hexToRgb(null));
 });
 
 test("#hexToRgb() => Throws an exception if the first argument is not a proper hex color.", t => {
 	t.throws(() => hexToRgb("foobar"));
-
 });
 
 test("#hexToRgb() => Generates RGB colors from hex strings. #1", t => {
@@ -652,24 +665,20 @@ test("#hexToRgb() => Generates RGB tuples from hex strings. #3", t => {
 });
 
 test("#toRgb() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => toRgb(null));
 });
 
 test("#toRgb() => Throws an exception if the first argument is not a proper color. #1", t => {
 	t.throws(() => toRgb("foobar"));
-
 });
 
 test("#toRgb() => Throws an exception if the first argument is not a proper color. #2", t => {
 	t.throws(() => toRgb("#1234"));
-
 });
 
 test("#toRgb() => Throws an exception if the first argument is not a proper color. #3", t => {
 	t.throws(() => toRgb("1234"));
-
 });
 
 test("#toRgb() => Throws an exception if the first argument is not a proper color. #4", t => {
@@ -678,7 +687,6 @@ test("#toRgb() => Throws an exception if the first argument is not a proper colo
 
 test("#toRgb() => Throws an exception if the first argument is not a proper color. #5", t => {
 	t.throws(() => toRgb("hsl(false, rgb, true)"));
-
 });
 
 test("#toRgb() => returns rgb colors just as they were. #1", t => {
@@ -738,14 +746,12 @@ test("#toRgb() => Converts HSV/HSB colors to RGB colors. #3", t => {
 });
 
 test("#hexToHslTuple() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hexToHslTuple(null));
 });
 
 test("#hexToHslTuple() => Throws an exception if the first argument is not a proper hex color.", t => {
 	t.throws(() => hexToHslTuple("foobar"));
-
 });
 
 test("#hexToHslTuple() => Generates HSL tuples from hex strings. #1", t => {
@@ -776,13 +782,11 @@ test("#hexToHslaTuple() => Throws an exception if the first argument is not of t
 
 test("#hexToHslaTuple() => Throws an exception if the first argument is not a proper hex color.", t => {
 	t.throws(() => hexToHslaTuple("foobar"));
-
 });
 
 test("#hexToHslaTuple() => Throws an exception if the second argument is not a number.", t => {
 	// @ts-ignore
 	t.throws(() => hexToHslaTuple("#000000", false));
-
 });
 
 test("#hexToHslaTuple() => Generates HSLa tuples from hex strings. #1", t => {
@@ -836,14 +840,12 @@ test("#hexToHsla() => Generates HSLa tuples from hex strings. #3", t => {
 });
 
 test("#hexToHsl() => Throws an exception if the first argument is not of type 'string'", t => {
-
 	// @ts-ignore
 	t.throws(() => hexToHsl(null));
 });
 
 test("#hexToHsl() => Throws an exception if the first argument is not a proper hex color.", t => {
 	t.throws(() => hexToHsl("foobar"));
-
 });
 
 test("#hexToHsl() => Generates HSL colors from hex strings. #1", t => {
@@ -872,7 +874,6 @@ test("#rgbToHslTuple() => Generates HSL tuples from RGB colors. #1", t => {
 	t.deepEqual(H, 117);
 	t.deepEqual(S, "67%");
 	t.deepEqual(L, "24%");
-
 });
 
 test("#rgbToHslTuple() => Generates HSL tuples from RGB colors. #2", t => {
@@ -1001,7 +1002,6 @@ test("#rgbToHsvTuple() => Generates HSV/HSB tuples from RGB colors. #1", t => {
 	t.deepEqual(H, 117);
 	t.deepEqual(S, 80);
 	t.deepEqual(V, 40);
-
 });
 
 test("#rgbToHsvTuple() => Generates HSV/HSB tuples from RGB colors. #2", t => {
@@ -1125,45 +1125,41 @@ test("#toHsv() => Converts HSL colors to HSV/HSB colors. #3", t => {
 });
 
 test("#randomHexColor() => always returns random valid hex colors", t => {
-
 	// 5000 times should be more than enough!
 	const limit = 5000;
 	for (let i = 0; i < limit; i++) {
 		const hex = randomHexColor();
-		if (!(/^#[0-9A-F]{6}$/i.test(hex))) t.fail(`invalid hex color generated: ${hex}`);
+		if (!/^#[0-9A-F]{6}$/i.test(hex)) t.fail(`invalid hex color generated: ${hex}`);
 	}
 	t.pass();
 });
 
 test("#randomRgbColor() => always returns random valid RGB colors", t => {
-
 	// 5000 times should be more than enough!
 	const limit = 5000;
 	for (let i = 0; i < limit; i++) {
 		const rgb = randomRgbColor();
-		if (!(/^rgb\(\s*.+\s*,\s*.+\s*,\s*.+\s*\)$/.test(rgb))) t.fail(`invalid RGB color generated: ${rgb}`);
+		if (!/^rgb\(\s*.+\s*,\s*.+\s*,\s*.+\s*\)$/.test(rgb)) t.fail(`invalid RGB color generated: ${rgb}`);
 	}
 	t.pass();
 });
 
 test("#randomHslColor() => always returns random valid HSL colors", t => {
-
 	// 5000 times should be more than enough!
 	const limit = 5000;
 	for (let i = 0; i < limit; i++) {
 		const hsl = randomHslColor();
-		if (!(/^hsl\(\s*.+\s*,\s*.+%\s*,\s*.+%\s*\)$/.test(hsl))) t.fail(`invalid HSL color generated: ${hsl}`);
+		if (!/^hsl\(\s*.+\s*,\s*.+%\s*,\s*.+%\s*\)$/.test(hsl)) t.fail(`invalid HSL color generated: ${hsl}`);
 	}
 	t.pass();
 });
 
 test("#randomHsvColor() => always returns random valid HSV/HSB colors", t => {
-
 	// 5000 times should be more than enough!
 	const limit = 5000;
 	for (let i = 0; i < limit; i++) {
 		const hsv = randomHsvColor();
-		if (!(/^hsb\(\s*.+\s*,\s*.+\s*,\s*.+\s*\)$/.test(hsv))) t.fail(`invalid HSV/HSB color generated: ${hsv}`);
+		if (!/^hsb\(\s*.+\s*,\s*.+\s*,\s*.+\s*\)$/.test(hsv)) t.fail(`invalid HSV/HSB color generated: ${hsv}`);
 	}
 	t.pass();
 });

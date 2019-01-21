@@ -1,4 +1,3 @@
-// tslint:disable:no-magic-numbers
 // tslint:disable:binary-expression-operand-order
 
 /**
@@ -9,9 +8,9 @@ const RGB_MAX_VALUE: number = 255;
 
 /**
  * A map between HTML color names and their hex values.
- * @type {Object}
+ * @type {Record<string, string>}
  */
-export const COLOR_NAMES: { [key: string]: string } = {
+export const COLOR_NAMES: Record<string, string> = {
 	aliceblue: "#f0f8ff",
 	antiquewhite: "#faebd7",
 	aqua: "#00ffff",
@@ -163,7 +162,7 @@ export const COLOR_NAMES: { [key: string]: string } = {
  * @throws  {TypeError}                      If the 'saturation' couldn't be decoded from the given string.
  * @throws  {TypeError}                      If the 'lightness' couldn't be decoded from the given string.
  */
-export function hslStringToHslTuple (hsl: string): [number, string, string] {
+export function hslStringToHslTuple(hsl: string): [number, string, string] {
 	if (typeof hsl !== "string") throw new TypeError(`first argument to 'hslStringToHslTuple' must be of type 'string'!`);
 
 	const result = hsl.slice(hsl.indexOf("(") + 1, hsl.lastIndexOf(")")).split(",");
@@ -176,11 +175,7 @@ export function hslStringToHslTuple (hsl: string): [number, string, string] {
 	if (isNaN(parseInt(SATURATION))) throw new TypeError(`Couldn't decode the 'saturation' value for the given hsl color: ${hsl}`);
 	if (isNaN(parseInt(LIGHTNESS))) throw new TypeError(`Couldn't decode the 'lightness' value for the given hsl color: ${hsl}`);
 
-	return [
-		HUE,
-		SATURATION.slice(SATURATION.length - 1) !== "%" ? `${SATURATION}%` : SATURATION,
-		LIGHTNESS.slice(LIGHTNESS.length - 1) !== "%" ? `${LIGHTNESS}%` : LIGHTNESS
-	];
+	return [HUE, SATURATION.slice(SATURATION.length - 1) !== "%" ? `${SATURATION}%` : SATURATION, LIGHTNESS.slice(LIGHTNESS.length - 1) !== "%" ? `${LIGHTNESS}%` : LIGHTNESS];
 }
 
 /**
@@ -191,7 +186,7 @@ export function hslStringToHslTuple (hsl: string): [number, string, string] {
  * @throws  {TypeError}          If the first argument is not of type 'string'.
  * @throws  {TypeError}          If the second argument is not of type 'number'.
  */
-export function hslToHsla (hsl: string, alpha: number = 1): string {
+export function hslToHsla(hsl: string, alpha: number = 1): string {
 	if (typeof hsl !== "string") throw new TypeError(`first argument to 'hslToHsla' must be of type 'string'!`);
 	if (typeof alpha !== "number") throw new TypeError(`second argument to 'hslToHsla' must be of type 'number'!`);
 	const [H, S, L] = hslStringToHslTuple(hsl);
@@ -204,7 +199,7 @@ export function hslToHsla (hsl: string, alpha: number = 1): string {
  * @returns {[number, string, string, number]} The HSLA color in a tuple representation.
  * @throws  {TypeError}                        If the 'alpha' couldn't be decoded from the given string.
  */
-export function hslaStringToHslaTuple (hsla: string): [number, string, string, number] {
+export function hslaStringToHslaTuple(hsla: string): [number, string, string, number] {
 	if (typeof hsla !== "string") throw new TypeError(`first argument to 'hslaStringToHslaTuple' must be of type 'string'!`);
 
 	const [HUE, SATURATION, LIGHTNESS] = hslStringToHslTuple(hsla);
@@ -213,12 +208,7 @@ export function hslaStringToHslaTuple (hsla: string): [number, string, string, n
 
 	if (isNaN(ALPHA)) throw new TypeError(`Couldn't decode the 'alpha' value for the given hsla color: ${hsla}`);
 
-	return [
-		HUE,
-		SATURATION.slice(SATURATION.length - 1) !== "%" ? `${SATURATION}%` : SATURATION,
-		LIGHTNESS.slice(LIGHTNESS.length - 1) !== "%" ? `${LIGHTNESS}%` : LIGHTNESS,
-		ALPHA
-	];
+	return [HUE, SATURATION.slice(SATURATION.length - 1) !== "%" ? `${SATURATION}%` : SATURATION, LIGHTNESS.slice(LIGHTNESS.length - 1) !== "%" ? `${LIGHTNESS}%` : LIGHTNESS, ALPHA];
 }
 
 /**
@@ -227,8 +217,7 @@ export function hslaStringToHslaTuple (hsla: string): [number, string, string, n
  * @param   {boolean}                  [rounding=true] - If true, the r, g and b values will be rounded.
  * @returns {[number, number, number]}                   The RGB color as a tuple.
  */
-export function hslToRgbTuple (hsl: string, rounding: boolean = true): [number, number, number] {
-
+export function hslToRgbTuple(hsl: string, rounding: boolean = true): [number, number, number] {
 	const [HUE, SATURATION, LIGHTNESS] = hslStringToHslTuple(hsl);
 
 	// The hue is fine as it is.
@@ -252,18 +241,16 @@ export function hslToRgbTuple (hsl: string, rounding: boolean = true): [number, 
 	}
 
 	// Depending on whether or not the lightness is less than 0.5 (50%), different formulas should be used.
-	const temp1 = l < 0.5
-		? l * (1 + s)
-		: l + s - l * s;
+	const temp1 = l < 0.5 ? l * (1 + s) : l + s - l * s;
 
 	const temp2 = 2 * l - temp1;
 
 	// Convert the 360 degrees in a circle to 1 by dividing the hue by 360.
 	const calculatedHue = h / 360;
 
-	let temporaryRed = calculatedHue + (1 / 3);
+	let temporaryRed = calculatedHue + 1 / 3;
 	let temporaryGreen = calculatedHue;
-	let temporaryBlue = calculatedHue - (1 / 3);
+	let temporaryBlue = calculatedHue - 1 / 3;
 
 	// All values need to be between 0 and 1. For negative values, we must add 1.
 	// For negative values, we must subtract 1.
@@ -275,21 +262,21 @@ export function hslToRgbTuple (hsl: string, rounding: boolean = true): [number, 
 	else if (temporaryBlue > 1) --temporaryBlue;
 
 	// Find the 'red' value.
-	if ((6 * temporaryRed) < 1) r = temp2 + (temp1 - temp2) * 6 * temporaryRed;
-	else if ((2 * temporaryRed) < 1) r = temp1;
-	else if ((3 * temporaryRed) < 2) r = temp2 + (temp1 - temp2) * ((2 / 3) - temporaryRed) * 6;
+	if (6 * temporaryRed < 1) r = temp2 + (temp1 - temp2) * 6 * temporaryRed;
+	else if (2 * temporaryRed < 1) r = temp1;
+	else if (3 * temporaryRed < 2) r = temp2 + (temp1 - temp2) * (2 / 3 - temporaryRed) * 6;
 	else r = temp2;
 
 	// Find the 'green' value.
-	if ((6 * temporaryGreen) < 1) g = temp2 + (temp1 - temp2) * 6 * temporaryGreen;
-	else if ((2 * temporaryGreen) < 1) g = temp1;
-	else if ((3 * temporaryGreen) < 2) g = temp2 + (temp1 - temp2) * ((2 / 3) - temporaryGreen) * 6;
+	if (6 * temporaryGreen < 1) g = temp2 + (temp1 - temp2) * 6 * temporaryGreen;
+	else if (2 * temporaryGreen < 1) g = temp1;
+	else if (3 * temporaryGreen < 2) g = temp2 + (temp1 - temp2) * (2 / 3 - temporaryGreen) * 6;
 	else g = temp2;
 
 	// Find the 'blue' value.
-	if ((6 * temporaryBlue) < 1) b = temp2 + (temp1 - temp2) * 6 * temporaryBlue;
-	else if ((2 * temporaryBlue) < 1) b = temp1;
-	else if ((3 * temporaryBlue) < 2) b = temp2 + (temp1 - temp2) * ((2 / 3) - temporaryBlue) * 6;
+	if (6 * temporaryBlue < 1) b = temp2 + (temp1 - temp2) * 6 * temporaryBlue;
+	else if (2 * temporaryBlue < 1) b = temp1;
+	else if (3 * temporaryBlue < 2) b = temp2 + (temp1 - temp2) * (2 / 3 - temporaryBlue) * 6;
 	else b = temp2;
 
 	if (rounding) return [Math.round(r * RGB_MAX_VALUE), Math.round(g * RGB_MAX_VALUE), Math.round(b * RGB_MAX_VALUE)];
@@ -302,7 +289,7 @@ export function hslToRgbTuple (hsl: string, rounding: boolean = true): [number, 
  * @param   {boolean} [rounding=true] - If the r, g and b values should be rounded.
  * @returns {string}                     The RGB color as a string.
  */
-export function hslToRgb (hsl: string, rounding: boolean = true): string {
+export function hslToRgb(hsl: string, rounding: boolean = true): string {
 	const [R, G, B] = hslToRgbTuple(hsl, rounding);
 	return `rgb(${R}, ${G}, ${B})`;
 }
@@ -312,7 +299,7 @@ export function hslToRgb (hsl: string, rounding: boolean = true): string {
  * @param   {string}                           hsla - The HSLa color to convert.
  * @returns {[number, number, number, number]}       The RGBa color as a tuple.
  */
-export function hslaToRgbaTuple (hsla: string): [number, number, number, number] {
+export function hslaToRgbaTuple(hsla: string): [number, number, number, number] {
 	const [R, G, B] = hslToRgbTuple(hsla);
 
 	// Extract the alpha value from the hsla string.
@@ -325,7 +312,7 @@ export function hslaToRgbaTuple (hsla: string): [number, number, number, number]
  * @param   {string} hsla - The HSLa color to convert.
  * @returns {string}       The RGBa color as a string.
  */
-export function hslaToRgba (hsla: string): string {
+export function hslaToRgba(hsla: string): string {
 	const [R, G, B, A] = hslaToRgbaTuple(hsla);
 	return `rgba(${R}, ${G}, ${B}, ${A})`;
 }
@@ -335,7 +322,7 @@ export function hslaToRgba (hsla: string): string {
  * @param   {string} hsla - The HSLa color to convert.
  * @returns {string}       The HSL color as a string.
  */
-export function hslaToHsl (hsla: string): string {
+export function hslaToHsl(hsla: string): string {
 	const [H, S, L] = hslaStringToHslaTuple(hsla);
 	return `hsl(${H}, ${S}, ${L})`;
 }
@@ -347,7 +334,7 @@ export function hslaToHsl (hsla: string): string {
  * @throws  {TypeError}                            If the first argument is not of type 'string'.
  * @throws  {TypeError}                            If an RGB color couldn't be extracted from the given string.
  */
-export function rgbStringToRgbTuple (rgbString: string): [number, number, number] {
+export function rgbStringToRgbTuple(rgbString: string): [number, number, number] {
 	if (typeof rgbString !== "string") throw new TypeError(`first argument must be of type 'string'!`);
 	const rgb = rgbString.match(/rgb\((.+)\s*,\s*(.+)\s*,\s*(.+)\s*\)/);
 	if (rgb == null) throw new TypeError(`'rgbToHex()' couldn't decode an RGB color from the given input: ${rgbString}`);
@@ -370,7 +357,7 @@ export function rgbStringToRgbTuple (rgbString: string): [number, number, number
  * @throws  {TypeError}                                     If the first argument is not of type 'string'.
  * @throws  {TypeError}                                     If an RGBa color couldn't be extracted from the given string.
  */
-export function rgbaStringToRgbaTuple (rgbaString: string): [number, number, number, number] {
+export function rgbaStringToRgbaTuple(rgbaString: string): [number, number, number, number] {
 	if (typeof rgbaString !== "string") throw new TypeError(`first argument must be of type 'string'!`);
 	const rgba = rgbaString.match(/rgba\((.+)\s*,\s*(.+)\s*,\s*(.+)\s*,\s*(.+)\s*\)/);
 	if (rgba == null) throw new TypeError(`Couldn't decode an RGBa color from the given input: ${rgbaString}`);
@@ -393,12 +380,12 @@ export function rgbaStringToRgbaTuple (rgbaString: string): [number, number, num
  * @param   {string} rgbString - An RGB string. For instance, rgb(RGB_MAX_VALUE, RGB_MAX_VALUE, RGB_MAX_VALUE).
  * @returns {string}             A hex representation of the string. For instance #f5f5f5.
  */
-export function rgbToHex (rgbString: string): string {
+export function rgbToHex(rgbString: string): string {
 	const [r, g, b] = rgbStringToRgbTuple(rgbString);
 
-	const bin = r << 16 | g << 8 | b;
-	return (function (h) {
-		return `#${new Array(7 - h.length).join("0") + h }`;
+	const bin = (r << 16) | (g << 8) | b;
+	return (function(h) {
+		return `#${new Array(7 - h.length).join("0") + h}`;
 	})(bin.toString(16).toLowerCase());
 }
 
@@ -409,14 +396,13 @@ export function rgbToHex (rgbString: string): string {
  * @returns {string}                  A hex representation of the string. For instance #f5f5f5.
  * @throws  {TypeError}               If the second argument is given but is not of type 'string'.
  */
-export function rgbaToHex (rgbaString: string, againstColor?: string) {
+export function rgbaToHex(rgbaString: string, againstColor?: string) {
 	if (againstColor != null && typeof againstColor !== "string") throw new TypeError(`argument 'againstColor' must be of type 'string'!`);
 	const [r, g, b, a] = rgbaStringToRgbaTuple(rgbaString);
 	if (againstColor != null) {
 		const [referenceR, referenceG, referenceB] = rgbStringToRgbTuple(toRgb(againstColor));
 		return rgbToHex(`rgb(${r * a + referenceR * (1 - a)}, ${g * a + referenceG * (1 - a)}, ${b * a + referenceB * (1 - a)})`);
-	}
-	else return rgbToHex(`rgb(${r}, ${g}, ${b})`);
+	} else return rgbToHex(`rgb(${r}, ${g}, ${b})`);
 }
 
 /**
@@ -426,7 +412,7 @@ export function rgbaToHex (rgbaString: string, againstColor?: string) {
  * @throws  {TypeError}                            If the first argument is not of type 'string'.
  * @throws  {TypeError}                            If an HSV color couldn't be extracted from the given string.
  */
-export function hsvStringToHsvTuple (hsvString: string): [number, number, number] {
+export function hsvStringToHsvTuple(hsvString: string): [number, number, number] {
 	if (typeof hsvString !== "string") throw new TypeError(`first argument must be of type 'string'!`);
 	let hsv = hsvString.match(/hsv\((.+)\s*,\s*(.+)\s*,\s*(.+)\s*\)/);
 	if (hsv == null) hsv = hsvString.match(/hsb\((.+)\s*,\s*(.+)\s*,\s*(.+)\s*\)/);
@@ -449,12 +435,12 @@ export function hsvStringToHsvTuple (hsvString: string): [number, number, number
  * @param   {string}                   hsv - The HSV color to convert.
  * @returns {[number, number, number]}       A tuple representation of the RGB color.
  */
-export function hsvToRgbTuple (hsv: string): [number, number, number] {
+export function hsvToRgbTuple(hsv: string): [number, number, number] {
 	const [H, S, V] = hsvStringToHsvTuple(hsv);
 
-	const normalizedH = (H === 360) ? 1 : (H % 360 / 360 * 6);
-	const normalizedS = (S === 100) ? 1 : (S % 100 / 100);
-	const normalizedV = (V === 100) ? 1 : (V % 100 / 100);
+	const normalizedH = H === 360 ? 1 : ((H % 360) / 360) * 6;
+	const normalizedS = S === 100 ? 1 : (S % 100) / 100;
+	const normalizedV = V === 100 ? 1 : (V % 100) / 100;
 
 	const hFloor = Math.floor(normalizedH);
 	const hFloorDiff = normalizedH - hFloor;
@@ -473,7 +459,7 @@ export function hsvToRgbTuple (hsv: string): [number, number, number] {
  * @param   {string} hsv - The HSV color to convert.
  * @returns {string}       A string representation of the RGB color.
  */
-export function hsvToRgb (hsv: string): string {
+export function hsvToRgb(hsv: string): string {
 	const [R, G, B] = hsvToRgbTuple(hsv);
 	return `rgb(${R}, ${G}, ${B})`;
 }
@@ -486,44 +472,33 @@ export function hsvToRgb (hsv: string): string {
  * @throws  {TypeError}      If the given color appears to be a hex color but is of invalid length.
  * @throws  {TypeError}      If the method didn't succeed in normalizing the given argument into a hex color.
  */
-export function toHex (color: string): string {
+export function toHex(color: string): string {
 	if (typeof color !== "string") throw new TypeError(`first argument to 'toHex()' must be a string!`);
 
 	if (color[0] === "#") {
-		if (color.length !== 4 && color.length !== 7) throw new TypeError(`first argument to 'toHex()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		if (color.length !== 4 && color.length !== 7) {
+			throw new TypeError(`first argument to 'toHex()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		}
 		return color;
-	}
-
-	else if (color.slice(0, 3) === "hsl") {
+	} else if (color.slice(0, 3) === "hsl") {
 		return rgbToHex(hslToRgb(color));
-	}
-
-	else if (color.slice(0, 4) === "hsla") {
+	} else if (color.slice(0, 4) === "hsla") {
 		return rgbaToHex(hslaToRgba(color), "white");
-	}
-
-	else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
+	} else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
 		return rgbToHex(hsvToRgb(color));
-	}
-
-	else if (color.slice(0, 4) === "rgba") {
+	} else if (color.slice(0, 4) === "rgba") {
 		return rgbaToHex(color, "white");
-	}
-
-	else if (color.slice(0, 3) === "rgb") {
+	} else if (color.slice(0, 3) === "rgb") {
 		return rgbToHex(color);
 	}
 
 	const colorNameMatch = COLOR_NAMES[color.toLowerCase()];
 	if (colorNameMatch != null) return colorNameMatch;
-
 	else if (/^[0-9A-F]{3}$|^[0-9A-F]{6}$/i.test(color)) {
 		// Must be a hex color without a '#' in front of it.
 		if (color.length !== 3 && color.length !== 6) throw new TypeError(`first argument to 'toHex()' must be a valid color. '${color}' was given!`);
 		return `#${color}`;
-	}
-
-	else throw new TypeError(`Couldn't decode color for input: ${color}`);
+	} else throw new TypeError(`Couldn't decode color for input: ${color}`);
 }
 
 /**
@@ -533,7 +508,7 @@ export function toHex (color: string): string {
  * @throws  {TypeError}                  If the first argument is not a string.
  * @throws  {TypeError}                  If the given hex could not be decoded as a hex color.
  */
-export function hexToRgbTuple (hex: string): [number, number, number] {
+export function hexToRgbTuple(hex: string): [number, number, number] {
 	if (typeof hex !== "string") throw new TypeError(`first argument to 'hexToRgbTuple' must be a string!`);
 	const properHex = toHex(hex);
 
@@ -556,7 +531,7 @@ export function hexToRgbTuple (hex: string): [number, number, number] {
  * @param   {string}  hex - The hex color to convert. For instance, #f5f5f5.
  * @returns {string}       The RGB version of the color.
  */
-export function hexToRgb (hex: string): string {
+export function hexToRgb(hex: string): string {
 	const [RED, GREEN, BLUE] = hexToRgbTuple(toHex(hex));
 	return `rgb(${RED}, ${GREEN}, ${BLUE})`;
 }
@@ -569,31 +544,23 @@ export function hexToRgb (hex: string): string {
  * @throws  {TypeError}      If the given color appears to be a hex color but is of invalid length.
  * @throws  {TypeError}      If the method didn't succeed in normalizing the given argument into a RGB color.
  */
-export function toRgb (color: string): string {
+export function toRgb(color: string): string {
 	if (typeof color !== "string") throw new TypeError(`first argument to 'toRgb()' must be a string!`);
 
 	if (color[0] === "#") {
-		if (color.length !== 4 && color.length !== 7) throw new TypeError(`first argument to 'toRgb()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		if (color.length !== 4 && color.length !== 7) {
+			throw new TypeError(`first argument to 'toRgb()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		}
 		return hexToRgb(color);
-	}
-
-	else if (color.slice(0, 3) === "hsl") {
+	} else if (color.slice(0, 3) === "hsl") {
 		return hslToRgb(color);
-	}
-
-	else if (color.slice(0, 4) === "hsla") {
+	} else if (color.slice(0, 4) === "hsla") {
 		return hslToRgb(color);
-	}
-
-	else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
+	} else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
 		return hsvToRgb(color);
-	}
-
-	else if (color.slice(0, 4) === "rgba") {
+	} else if (color.slice(0, 4) === "rgba") {
 		return hexToRgb(rgbaToHex(color, "white"));
-	}
-
-	else if (color.slice(0, 3) === "rgb") {
+	} else if (color.slice(0, 3) === "rgb") {
 		// Only call 'rgbStringToRgbTuple' to validate the actual rgb color. Will throw errors if something is missing.
 		rgbStringToRgbTuple(color);
 		return color;
@@ -601,14 +568,11 @@ export function toRgb (color: string): string {
 
 	const colorNameMatch = COLOR_NAMES[color.toLowerCase()];
 	if (colorNameMatch != null) return hexToRgb(colorNameMatch);
-
 	else if (/^[0-9A-F]{3}$|^[0-9A-F]{6}$/i.test(color)) {
 		// Must be a hex color without a '#' in front of it.
 		if (color.length !== 3 && color.length !== 6) throw new TypeError(`first argument to 'toRgb()' must be a valid color. '${color}' was given!`);
 		return hexToRgb(`#${color}`);
-	}
-
-	else throw new TypeError(`Couldn't decode color for input: ${color}`);
+	} else throw new TypeError(`Couldn't decode color for input: ${color}`);
 }
 
 /**
@@ -617,7 +581,7 @@ export function toRgb (color: string): string {
  * @param   {boolean}                  [rounding=true] - If true, the h, s and l values will be rounded.
  * @returns {[number, string, string]}                   A tuple of the HSL values.
  */
-export function hexToHslTuple (hex: string, rounding: boolean = true): [number, string, string] {
+export function hexToHslTuple(hex: string, rounding: boolean = true): [number, string, string] {
 	let [r, g, b] = hexToRgbTuple(toHex(hex));
 
 	r /= RGB_MAX_VALUE;
@@ -660,7 +624,7 @@ export function hexToHslTuple (hex: string, rounding: boolean = true): [number, 
  * @param   {number}                           [alpha=1] - The alpha channel value of the HSLA color.
  * @returns {[number, string, string, number]}             A tuple of the hue, saturation, lightness and alpha values.
  */
-export function hexToHslaTuple (hex: string, alpha: number = 1): [number, string, string, number] {
+export function hexToHslaTuple(hex: string, alpha: number = 1): [number, string, string, number] {
 	if (typeof alpha !== "number") throw new TypeError(`second argument to 'hexToHslaTuple' must be of type 'number'!`);
 	const [HUE, SATURATION, LIGHTNESS] = hexToHslTuple(hex);
 	return [HUE, SATURATION, LIGHTNESS, alpha];
@@ -672,7 +636,7 @@ export function hexToHslaTuple (hex: string, alpha: number = 1): [number, string
  * @param   {number} [alpha=1] - The alpha channel value of the HSLA color.
  * @returns {string}             The generated HSLA color.
  */
-export function hexToHsla (hex: string, alpha: number = 1): string {
+export function hexToHsla(hex: string, alpha: number = 1): string {
 	if (typeof alpha !== "number") throw new TypeError(`second argument to 'hexToHslaTuple' must be of type 'number'!`);
 	const [HUE, SATURATION, LIGHTNESS, ALPHA] = hexToHslaTuple(hex, alpha);
 	return `hsla(${HUE}, ${SATURATION}, ${LIGHTNESS}, ${ALPHA})`;
@@ -683,7 +647,7 @@ export function hexToHsla (hex: string, alpha: number = 1): string {
  * @param   {string} hex - The hex color to convert. For instance, #123456.
  * @returns {string}       The converted HSL color.
  */
-export function hexToHsl (hex: string): string {
+export function hexToHsl(hex: string): string {
 	const [HUE, SATURATION, LIGHTNESS] = hexToHslTuple(hex);
 	return `hsl(${HUE}, ${SATURATION}, ${LIGHTNESS})`;
 }
@@ -694,12 +658,12 @@ export function hexToHsl (hex: string): string {
  * @param {boolean}                     [rounding=true] - If true, the r, g and b values will be rounded.
  * @returns {[number, string, string]}                    A tuple representation of the HSL color.
  */
-export function rgbToHslTuple (rgb: string, rounding: boolean = true): [number, string, string] {
+export function rgbToHslTuple(rgb: string, rounding: boolean = true): [number, string, string] {
 	const [R, G, B] = rgbStringToRgbTuple(rgb);
 
-	const normalizedRed = (R === RGB_MAX_VALUE) ? 1 : (R % RGB_MAX_VALUE / RGB_MAX_VALUE);
-	const normalizedGreen = (G === RGB_MAX_VALUE) ? 1 : (G % RGB_MAX_VALUE / RGB_MAX_VALUE);
-	const normalizedBlue = (B === RGB_MAX_VALUE) ? 1 : (B % RGB_MAX_VALUE / RGB_MAX_VALUE);
+	const normalizedRed = R === RGB_MAX_VALUE ? 1 : (R % RGB_MAX_VALUE) / RGB_MAX_VALUE;
+	const normalizedGreen = G === RGB_MAX_VALUE ? 1 : (G % RGB_MAX_VALUE) / RGB_MAX_VALUE;
+	const normalizedBlue = B === RGB_MAX_VALUE ? 1 : (B % RGB_MAX_VALUE) / RGB_MAX_VALUE;
 
 	const max = Math.max(normalizedRed, normalizedGreen, normalizedBlue);
 	const min = Math.min(normalizedRed, normalizedGreen, normalizedBlue);
@@ -709,9 +673,7 @@ export function rgbToHslTuple (rgb: string, rounding: boolean = true): [number, 
 
 	if (max !== min) {
 		const diff = max - min;
-		s = l > 0.5
-			? diff / (2 - max - min)
-			: diff / (max + min);
+		s = l > 0.5 ? diff / (2 - max - min) : diff / (max + min);
 
 		switch (max) {
 			case normalizedRed:
@@ -737,7 +699,7 @@ export function rgbToHslTuple (rgb: string, rounding: boolean = true): [number, 
  * @param   {string} rgb - The RGB color to convert.
  * @returns {string}       A string representation of the HSL color.
  */
-export function rgbToHsl (rgb: string): string {
+export function rgbToHsl(rgb: string): string {
 	const [H, S, L] = rgbToHslTuple(rgb);
 	return `hsl(${H}, ${S}, ${L})`;
 }
@@ -750,46 +712,35 @@ export function rgbToHsl (rgb: string): string {
  * @throws  {TypeError}      If the given color appears to be a hex color but is of invalid length.
  * @throws  {TypeError}      If the method didn't succeed in normalizing the given argument into a HSL color.
  */
-export function toHsl (color: string): string {
+export function toHsl(color: string): string {
 	if (typeof color !== "string") throw new TypeError(`first argument to 'toHsl()' must be a string!`);
 
 	if (color[0] === "#") {
-		if (color.length !== 4 && color.length !== 7) throw new TypeError(`first argument to 'toHsl()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		if (color.length !== 4 && color.length !== 7) {
+			throw new TypeError(`first argument to 'toHsl()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		}
 		return hexToHsl(color);
-	}
-
-	else if (color.slice(0, 3) === "hsl") {
+	} else if (color.slice(0, 3) === "hsl") {
 		// Validate the HSL and add missing '%' symbols if required.
 		const [H, S, L] = hslStringToHslTuple(color);
 		return `hsl(${H}, ${S}, ${L})`;
-	}
-
-	else if (color.slice(0, 4) === "hsla") {
+	} else if (color.slice(0, 4) === "hsla") {
 		return hslaToHsl(color);
-	}
-
-	else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
+	} else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
 		return rgbToHsl(hsvToRgb(color));
-	}
-
-	else if (color.slice(0, 4) === "rgba") {
+	} else if (color.slice(0, 4) === "rgba") {
 		return hexToHsl(rgbaToHex(color, "white"));
-	}
-
-	else if (color.slice(0, 3) === "rgb") {
+	} else if (color.slice(0, 3) === "rgb") {
 		return rgbToHsl(color);
 	}
 
 	const colorNameMatch = COLOR_NAMES[color.toLowerCase()];
 	if (colorNameMatch != null) return hexToHsl(colorNameMatch);
-
 	else if (/^[0-9A-F]{3}$|^[0-9A-F]{6}$/i.test(color)) {
 		// Must be a hex color without a '#' in front of it.
 		if (color.length !== 3 && color.length !== 6) throw new TypeError(`first argument to 'toHsl()' must be a valid color. '${color}' was given!`);
 		return hexToHsl(`#${color}`);
-	}
-
-	else throw new TypeError(`Couldn't decode color for input: ${color}`);
+	} else throw new TypeError(`Couldn't decode color for input: ${color}`);
 }
 
 /**
@@ -798,13 +749,13 @@ export function toHsl (color: string): string {
  * @returns {[number, number, number]}        A tuple representation of the HSV/HSB color.
  * @throws  {TypeError}                       If the first argument is not of type 'string'.
  */
-export function rgbToHsvTuple (rgb: string): [number, number, number] {
+export function rgbToHsvTuple(rgb: string): [number, number, number] {
 	if (typeof rgb !== "string") throw new TypeError(`first argument must be a string!`);
 	const [R, G, B] = rgbStringToRgbTuple(rgb);
 
-	const normalizedRed = (R === RGB_MAX_VALUE) ? 1 : (R % RGB_MAX_VALUE / RGB_MAX_VALUE);
-	const normalizedGreen = (G === RGB_MAX_VALUE) ? 1 : (G % RGB_MAX_VALUE / RGB_MAX_VALUE);
-	const normalizedBlue = (B === RGB_MAX_VALUE) ? 1 : (B % RGB_MAX_VALUE / RGB_MAX_VALUE);
+	const normalizedRed = R === RGB_MAX_VALUE ? 1 : (R % RGB_MAX_VALUE) / RGB_MAX_VALUE;
+	const normalizedGreen = G === RGB_MAX_VALUE ? 1 : (G % RGB_MAX_VALUE) / RGB_MAX_VALUE;
+	const normalizedBlue = B === RGB_MAX_VALUE ? 1 : (B % RGB_MAX_VALUE) / RGB_MAX_VALUE;
 
 	const max = Math.max(normalizedRed, normalizedGreen, normalizedBlue);
 	const min = Math.min(normalizedRed, normalizedGreen, normalizedBlue);
@@ -836,7 +787,7 @@ export function rgbToHsvTuple (rgb: string): [number, number, number] {
  * @param   {string} rgb - The RGB color to convert.
  * @returns {string}       A string representation of the HSV/HSB color.
  */
-export function rgbToHsv (rgb: string): string {
+export function rgbToHsv(rgb: string): string {
 	const [H, S, V] = rgbToHsvTuple(rgb);
 	return `hsb(${H}, ${S}, ${V})`;
 }
@@ -849,54 +800,43 @@ export function rgbToHsv (rgb: string): string {
  * @throws  {TypeError}      If the given color appears to be a hex color but is of invalid length.
  * @throws  {TypeError}      If the method didn't succeed in normalizing the given argument into a HSV/HSB color.
  */
-export function toHsv (color: string): string {
+export function toHsv(color: string): string {
 	if (typeof color !== "string") throw new TypeError(`first argument to 'toHsv()' must be a string!`);
 
 	if (color[0] === "#") {
-		if (color.length !== 4 && color.length !== 7) throw new TypeError(`first argument to 'toHsv()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		if (color.length !== 4 && color.length !== 7) {
+			throw new TypeError(`first argument to 'toHsv()' must be a valid color. What appears to be a hex color was given: '${color}', but it doesn't have a valid amount of characters!`);
+		}
 		return rgbToHsv(hexToRgb(color));
-	}
-
-	else if (color.slice(0, 3) === "hsl") {
+	} else if (color.slice(0, 3) === "hsl") {
 		return rgbToHsv(hslToRgb(color));
-	}
-
-	else if (color.slice(0, 4) === "hsla") {
+	} else if (color.slice(0, 4) === "hsla") {
 		return rgbToHsv(hexToRgb(rgbaToHex(hslaToRgba(color), "white")));
-	}
-
-	else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
+	} else if (color.slice(0, 3) === "hsb" || color.slice(0, 3) === "hsv") {
 		// Only used for validating the input HSB/HSV color.
 		hsvStringToHsvTuple(color);
 		return color;
-	}
-
-	else if (color.slice(0, 4) === "rgba") {
+	} else if (color.slice(0, 4) === "rgba") {
 		return rgbToHsv(hexToRgb(rgbaToHex(color, "white")));
-	}
-
-	else if (color.slice(0, 3) === "rgb") {
+	} else if (color.slice(0, 3) === "rgb") {
 		return rgbToHsv(color);
 	}
 
 	const colorNameMatch = COLOR_NAMES[color.toLowerCase()];
 	if (colorNameMatch != null) return rgbToHsv(hexToRgb(colorNameMatch));
-
 	else if (/^[0-9A-F]{3}$|^[0-9A-F]{6}$/i.test(color)) {
 		// Must be a hex color without a '#' in front of it.
 		if (color.length !== 3 && color.length !== 6) throw new TypeError(`first argument to 'toHsv()' must be a valid color. '${color}' was given!`);
 		return rgbToHsv(hexToRgb(`#${color}`));
-	}
-
-	else throw new TypeError(`Couldn't decode color for input: ${color}`);
+	} else throw new TypeError(`Couldn't decode color for input: ${color}`);
 }
 
 /**
  * Generates a random hex color and returns it.
  * @returns {string} a hex color.
  */
-export function randomHexColor (): string {
-	const color = (Math.random() * 0xFFFFFF << 0).toString(16);
+export function randomHexColor(): string {
+	const color = ((Math.random() * 0xffffff) << 0).toString(16);
 	if (color.length < 6) return randomHexColor();
 	else return `#${color}`;
 }
@@ -905,7 +845,7 @@ export function randomHexColor (): string {
  * Generates a random RGB color and returns it.
  * @returns {string} an RGB color.
  */
-export function randomRgbColor (): string {
+export function randomRgbColor(): string {
 	return hexToRgb(randomHexColor());
 }
 
@@ -913,7 +853,7 @@ export function randomRgbColor (): string {
  * Generates a random HSL color and returns it.
  * @returns {string} an HSL color.
  */
-export function randomHslColor (): string {
+export function randomHslColor(): string {
 	return hexToHsl(randomHexColor());
 }
 
@@ -921,7 +861,7 @@ export function randomHslColor (): string {
  * Generates a random HSV/HSB color and returns it.
  * @returns {string} an HSV/HSB color.
  */
-export function randomHsvColor (): string {
+export function randomHsvColor(): string {
 	return rgbToHsv(randomRgbColor());
 }
 
@@ -931,9 +871,9 @@ export function randomHsvColor (): string {
  * @param   {number} [percentage=10]  - The percentage with which to saturate the color.
  * @returns {string}                    The new HSL color.
  */
-export function saturateHsl (hsl: string, percentage: number = 10): string {
+export function saturateHsl(hsl: string, percentage: number = 10): string {
 	const [H, S, L] = hslStringToHslTuple(hsl);
-	return `hsl(${H}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(S) / 100))}%, ${L})`;
+	return `hsl(${H}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(S)) / 100))}%, ${L})`;
 }
 
 /**
@@ -942,9 +882,9 @@ export function saturateHsl (hsl: string, percentage: number = 10): string {
  * @param   {number} [percentage=10]  - The percentage with which to lighten the color.
  * @returns {string}                    The new HSL color.
  */
-export function lightenHsl (hsl: string, percentage: number = 10): string {
+export function lightenHsl(hsl: string, percentage: number = 10): string {
 	const [H, S, L] = hslStringToHslTuple(hsl);
-	return `hsl(${H}, ${S}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(L) / 100))}%)`;
+	return `hsl(${H}, ${S}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(L)) / 100))}%)`;
 }
 
 /**
@@ -953,9 +893,9 @@ export function lightenHsl (hsl: string, percentage: number = 10): string {
  * @param   {number} [percentage=10]  - The percentage with which to saturate the color.
  * @returns {string}                    The new HSLa color.
  */
-export function saturateHsla (hsla: string, percentage: number = 10): string {
+export function saturateHsla(hsla: string, percentage: number = 10): string {
 	const [H, S, L, A] = hslaStringToHslaTuple(hsla);
-	return `hsla(${H}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(S) / 100))}%, ${L}, ${A})`;
+	return `hsla(${H}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(S)) / 100))}%, ${L}, ${A})`;
 }
 
 /**
@@ -964,9 +904,9 @@ export function saturateHsla (hsla: string, percentage: number = 10): string {
  * @param   {number} [percentage=10]  - The percentage with which to lighten the color.
  * @returns {string}                    The new HSLa color.
  */
-export function lightenHsla (hsla: string, percentage: number = 10): string {
+export function lightenHsla(hsla: string, percentage: number = 10): string {
 	const [H, S, L, A] = hslaStringToHslaTuple(hsla);
-	return `hsla(${H}, ${S}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(L) / 100))}%, ${A})`;
+	return `hsla(${H}, ${S}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(L)) / 100))}%, ${A})`;
 }
 
 /**
@@ -975,9 +915,9 @@ export function lightenHsla (hsla: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to saturate the color.
  * @returns {string}                   The new RGB color.
  */
-export function saturateRgb (rgb: string, percentage: number = 10): string {
+export function saturateRgb(rgb: string, percentage: number = 10): string {
 	const [H, S, L] = rgbToHslTuple(rgb);
-	return hslToRgb(`hsl(${H}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(S) / 100))}%, ${L})`);
+	return hslToRgb(`hsl(${H}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(S)) / 100))}%, ${L})`);
 }
 
 /**
@@ -986,9 +926,9 @@ export function saturateRgb (rgb: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to lighten the color.
  * @returns {string}                   The new RGB color.
  */
-export function lightenRgb (rgb: string, percentage: number = 10): string {
+export function lightenRgb(rgb: string, percentage: number = 10): string {
 	const [H, S, L] = rgbToHslTuple(rgb);
-	return hslToRgb(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(L) / 100))}%)`);
+	return hslToRgb(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(L)) / 100))}%)`);
 }
 
 /**
@@ -997,10 +937,10 @@ export function lightenRgb (rgb: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to saturate the color.
  * @returns {string}                   The new RGBa color.
  */
-export function saturateRgba (rgba: string, percentage: number = 10): string {
+export function saturateRgba(rgba: string, percentage: number = 10): string {
 	const [R, G, B, A] = rgbaStringToRgbaTuple(rgba);
 	const [H, S, L] = rgbToHslTuple(`rgb(${R}, ${G}, ${B})`);
-	const [NEW_R, NEW_G, NEW_B] = hslToRgbTuple(`hsl(${H}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(S) / 100))}%, ${L})`);
+	const [NEW_R, NEW_G, NEW_B] = hslToRgbTuple(`hsl(${H}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(S)) / 100))}%, ${L})`);
 	return `rgba(${NEW_R}, ${NEW_G}, ${NEW_B}, ${A})`;
 }
 
@@ -1010,10 +950,10 @@ export function saturateRgba (rgba: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to lighten the color.
  * @returns {string}                   The new RGBa color.
  */
-export function lightenRgba (rgba: string, percentage: number = 10): string {
+export function lightenRgba(rgba: string, percentage: number = 10): string {
 	const [R, G, B, A] = rgbaStringToRgbaTuple(rgba);
 	const [H, S, L] = rgbToHslTuple(`rgb(${R}, ${G}, ${B})`);
-	const [NEW_R, NEW_G, NEW_B] = hslToRgbTuple(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(L) / 100))}%)`);
+	const [NEW_R, NEW_G, NEW_B] = hslToRgbTuple(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(L)) / 100))}%)`);
 	return `rgba(${NEW_R}, ${NEW_G}, ${NEW_B}, ${A})`;
 }
 
@@ -1023,9 +963,9 @@ export function lightenRgba (rgba: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to saturate the color.
  * @returns {string}                   The new hex color.
  */
-export function saturateHex (hex: string, percentage: number = 10): string {
+export function saturateHex(hex: string, percentage: number = 10): string {
 	const [H, S, L] = hexToHslTuple(hex);
-	return rgbToHex(hslToRgb(`hsl(${H}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(S) / 100))}%, ${L})`));
+	return rgbToHex(hslToRgb(`hsl(${H}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(S)) / 100))}%, ${L})`));
 }
 
 /**
@@ -1034,9 +974,9 @@ export function saturateHex (hex: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to lighten the color.
  * @returns {string}                   The new hex color.
  */
-export function lightenHex (hex: string, percentage: number = 10): string {
+export function lightenHex(hex: string, percentage: number = 10): string {
 	const [H, S, L] = hexToHslTuple(hex);
-	return rgbToHex(hslToRgb(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(L) / 100))}%)`));
+	return rgbToHex(hslToRgb(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(L)) / 100))}%)`));
 }
 
 /**
@@ -1045,10 +985,10 @@ export function lightenHex (hex: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to saturate the color.
  * @returns {string}                   The new HSV/HSB color.
  */
-export function saturateHsv (hsv: string, percentage: number = 10): string {
+export function saturateHsv(hsv: string, percentage: number = 10): string {
 	const [H, S, V] = hsvStringToHsvTuple(hsv);
 	const hsbOrHsv = hsv.slice(0, 3) === "hsb" ? "hsb" : "hsv";
-	return `${hsbOrHsv}(${H}, ${Math.max(0, Math.min(100, (100 + percentage) * S / 100))}, ${V})`;
+	return `${hsbOrHsv}(${H}, ${Math.max(0, Math.min(100, ((100 + percentage) * S) / 100))}, ${V})`;
 }
 
 /**
@@ -1057,9 +997,9 @@ export function saturateHsv (hsv: string, percentage: number = 10): string {
  * @param   {number} [percentage=10] - The percentage with which to lighten the color.
  * @returns {string}                   The new HSV/HSB color.
  */
-export function lightenHsv (hsv: string, percentage: number = 10): string {
+export function lightenHsv(hsv: string, percentage: number = 10): string {
 	const [H, S, L] = rgbToHslTuple(hsvToRgb(hsv));
-	return rgbToHsv(hslToRgb(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, (100 + percentage) * parseFloat(L) / 100))})`));
+	return rgbToHsv(hslToRgb(`hsl(${H}, ${S}, ${Math.max(0, Math.min(100, ((100 + percentage) * parseFloat(L)) / 100))})`));
 }
 
 /**
@@ -1069,7 +1009,7 @@ export function lightenHsv (hsv: string, percentage: number = 10): string {
  * @param {number} [percentage=10] - How much to saturate the color in percent.
  * @returns {string}                 The new color.
  */
-export function saturate (color: string, percentage: number = 10): string {
+export function saturate(color: string, percentage: number = 10): string {
 	if (color.slice(0, 4) === "rgba") return saturateRgba(color, percentage);
 	if (color.slice(0, 4) === "hsla") return saturateHsla(color, percentage);
 	if (color.slice(0, 3) === "rgb") return saturateRgb(color, percentage);
@@ -1086,7 +1026,7 @@ export function saturate (color: string, percentage: number = 10): string {
  * @param {number} [percentage=10] - How much to lighten the color in percent.
  * @returns {string}                 The new color.
  */
-export function lighten (color: string, percentage: number = 10): string {
+export function lighten(color: string, percentage: number = 10): string {
 	if (color.slice(0, 4) === "rgba") return lightenRgba(color, percentage);
 	if (color.slice(0, 4) === "hsla") return lightenHsla(color, percentage);
 	if (color.slice(0, 3) === "rgb") return lightenRgb(color, percentage);
@@ -1101,7 +1041,7 @@ export function lighten (color: string, percentage: number = 10): string {
  * @param   {string} color - The color to check. Can be a hex, RGB, RGBa, HSL, HSLa, HSV, HSB or color name.
  * @returns {boolean}        Whether or not the color is light.
  */
-export function isLight (color: string): boolean {
+export function isLight(color: string): boolean {
 	const luminance = parseFloat(hslStringToHslTuple(toHsl(color))[2]);
 	return luminance > 40;
 }

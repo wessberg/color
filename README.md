@@ -1,16 +1,14 @@
-# @wessberg/color
-[![NPM version][npm-version-image]][npm-version-url]
-[![License-mit][license-mit-image]][license-mit-url]
+<img alt="Logo for @wessberg/color" src="https://raw.githubusercontent.com/wessberg/color/master/documentation/asset/logo.png" height="200"></img><br>
+<a href="https://npmcharts.com/compare/@wessberg/color?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/%40wessberg%2Fcolor.svg" height="20"></img></a>
+<a href="https://david-dm.org/wessberg/color"><img alt="Dependencies" src="https://img.shields.io/david/wessberg/color.svg" height="20"></img></a>
+<a href="https://www.npmjs.com/package/@wessberg/color"><img alt="NPM Version" src="https://badge.fury.io/js/%40wessberg%2Fcolor.svg" height="20"></img></a>
+<a href="https://github.com/wessberg/color/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/wessberg%2Fcolor.svg" height="20"></img></a>
+<a href="https://opensource.org/licenses/MIT"><img alt="MIT License" src="https://img.shields.io/badge/License-MIT-yellow.svg" height="20"></img></a>
+<a href="https://www.patreon.com/bePatron?u=11315442"><img alt="Support on Patreon" src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" height="20"></img></a>
 
-<a href="https://www.patreon.com/bePatron?u=11315442"><img height="30" src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" /></a>
+# `@wessberg/color`
 
-[license-mit-url]: https://opensource.org/licenses/MIT
-[license-mit-image]: https://img.shields.io/badge/License-MIT-yellow.svg
-[npm-version-url]: https://www.npmjs.com/package/@wessberg/color
-[npm-version-image]: https://badge.fury.io/js/%40wessberg%2Fcolor.svg
-
-## Installation
-Simply do: `npm install @wessberg/color`.
+> A library of helper methods for working with colors.
 
 ## Description
 
@@ -18,6 +16,7 @@ This is a collection of helper functions for working with colors and converting 
 The library takes care of figuring out which color system your input string comes from, so you can just use the library and not care about the rest.
 
 Supported color systems:
+
 - RGB/RGBa
 - Hex
 - HSV/HSB
@@ -28,35 +27,65 @@ At the time of writing, 389 tests has been written for the library methods. I'd 
 
 Have fun!
 
-## Examples
+## Install
 
-```typescript
-import {toHsl, lighten, saturate, isLight, randomHexColor} from "@wessberg/color";
+### NPM
 
-toHsl("#DC143C")          // returns 'hsl(348, 83%, 47%)'
-toHsl("DC143C")           // returns 'hsl(348, 83%, 47%)'
-toHsl("rgb(220, 20, 60)") // returns 'hsl(348, 83%, 47%)'
-toHsl("crimson")          // returns 'hsl(348, 83%, 47%)'
-toHsl("hsb(348, 91, 86)") // returns 'hsl(348, 83%, 47%)'
+```
+$ npm install @wessberg/color
+```
 
-lighten("#DDACED", 10)        // lightens the color 10% and returns the new value: #EACDF4.
-saturate("brown", 100)        // saturates the HTML color 'brown' an additional 100%.
-isLight("rgb(234, 205, 244)") // returns true, that's a pretty light color.
-randomHexColor();             // returns a random hex color.
+### Yarn
+
+```
+$ yarn add @wessberg/color
 ```
 
 ## Usage
+
 Import it in your project like this:
 
 ```typescript
-import {saturate, toRgb, toHex, ...} from "@wessberg/color";
+import {saturate, toRgb, toHex /* ... */} from "@wessberg/color";
 ```
 
-## Backers
+## Examples
 
-[Become a backer](https://www.patreon.com/bePatron?c=1770586) and get your name, logo, and link to your site listed here. Your help is greatly appreciated!
+```typescript
+import {toHsl, toRgb, toHex, lighten, saturate, isLight, randomHexColor} from "@wessberg/color";
 
-## Converting from RGBa to color systems without alpha channels
+toHex(`rgb(50, 50, 63)`); // returns '#32323f'
+toHsl("#DC143C"); // returns 'hsl(348, 83%, 47%)'
+toHsl("DC143C"); // returns 'hsl(348, 83%, 47%)'
+toHsl("rgb(220, 20, 60)"); // returns 'hsl(348, 83%, 47%)'
+toRgb("darkblue"); // returns 'rgb(0, 0, 139)'
+toHsl("hsb(348, 91, 86)"); // returns 'hsl(348, 83%, 47%)'
+
+lighten("#DDACED", 10); // lightens the color 10% and returns the new value: #EACDF4.
+saturate("brown", 100); // saturates the HTML color 'brown' an additional 100%.
+isLight("rgb(234, 205, 244)"); // returns true, that's a pretty light color.
+randomHexColor(); // returns a random hex color.
+```
+
+## Contributing
+
+Do you want to contribute? Awesome! Please follow [these recommendations](./CONTRIBUTING.md).
+
+## Maintainers
+
+- <a href="https://github.com/wessberg"><img alt="Frederik Wessberg" src="https://avatars2.githubusercontent.com/u/20454213?s=460&v=4" height="11"></img></a> [Frederik Wessberg](https://github.com/wessberg): _Maintainer_
+
+## Backers 🏅
+
+[Become a backer](https://www.patreon.com/bePatron?u=11315442) and get your name, logo, and link to your site listed here.
+
+## License 📄
+
+MIT © [Frederik Wessberg](https://github.com/wessberg)
+
+## FAQ
+
+#### Converting from RGBa to color systems without alpha channels
 
 Many color system conversion libraries will discard the alpha channel when converting from colors that has an alpha channel.
 This means that converting from, say, `rgba(0,0,0,.5)` to RGB would normally become `rgb(0,0,0)`, but that is far from the same
@@ -69,7 +98,7 @@ that look identical to the RGBa color for all color systems, as long as they are
 
 ### `#isLight()`
 
-*Determines if the given color is light or not.*
+_Determines if the given color is light or not._
 
 **Signature:**
 
@@ -83,16 +112,17 @@ isLight (color: string): boolean
 
 **Returns**:
 
-`boolean`         - Returns true if the color is light, false otherwise.
+`boolean` - Returns true if the color is light, false otherwise.
 
 #### Example
+
 ```typescript
-isLight("rgb(234, 205, 244)") // returns true, that's a pretty light color.
+isLight("rgb(234, 205, 244)"); // returns true, that's a pretty light color.
 ```
 
 ### `#lighten()`
 
-*Changes the lightness of the given color. Will automatically determine the type of color and how to handle it. Pass negative values to darken the color instead.*
+_Changes the lightness of the given color. Will automatically determine the type of color and how to handle it. Pass negative values to darken the color instead._
 
 **Signature:**
 
@@ -102,23 +132,24 @@ lighten (color: string, percentage: number = 10): string
 
 **Arguments**:
 
-- `color: string`        - The color to lighten. Can be any of the color systems CSS can handle with the addition of HSB/HSV.
+- `color: string` - The color to lighten. Can be any of the color systems CSS can handle with the addition of HSB/HSV.
 
-- `percentage?: number`  - Optionally, the amount of percentage to lighten the color. Pass a negative value to darken the color instead. `Default = 10`
+- `percentage?: number` - Optionally, the amount of percentage to lighten the color. Pass a negative value to darken the color instead. `Default = 10`
 
 **Returns**:
 
 `string` - The lightened/darkened color.
 
 #### Example
+
 ```typescript
-lighten("#DDACED", 10) // lightens the color 10% and returns the new value: #EACDF4.
-lighten("#DDACED", -90) // darkens the color 90% and returns the new value: #1B0721.
+lighten("#DDACED", 10); // lightens the color 10% and returns the new value: #EACDF4.
+lighten("#DDACED", -90); // darkens the color 90% and returns the new value: #1B0721.
 ```
 
 ### `#saturate()`
 
-*Changes the saturation of the given color. Will automatically determine the type of color and how to handle it. Pass a negative percentage value to desaturate the color instead.*
+_Changes the saturation of the given color. Will automatically determine the type of color and how to handle it. Pass a negative percentage value to desaturate the color instead._
 
 **Signature:**
 
@@ -128,23 +159,24 @@ saturate (color: string, percentage: number = 10): string
 
 **Arguments**:
 
-- `color: string`        - The color to saturate. Can be any of the color systems CSS can handle with the addition of HSB/HSV.
+- `color: string` - The color to saturate. Can be any of the color systems CSS can handle with the addition of HSB/HSV.
 
-- `percentage?: number`  - Optionally, the amount of percentage to saturate the color. Pass a negative value to desaturate the color instead. `Default = 10`
+- `percentage?: number` - Optionally, the amount of percentage to saturate the color. Pass a negative value to desaturate the color instead. `Default = 10`
 
 **Returns**:
 
 `string` - The saturated/desaturated color.
 
 #### Example
+
 ```typescript
-saturate("brown", 100)  // saturates the HTML color 'brown' an additional 100%.
-saturate("brown", -100) // desaturates the HTML color 'brown' 100%.
+saturate("brown", 100); // saturates the HTML color 'brown' an additional 100%.
+saturate("brown", -100); // desaturates the HTML color 'brown' 100%.
 ```
 
 ### `#toHex()`
 
-*Takes a color and converts it to a hex color.*
+_Takes a color and converts it to a hex color._
 
 **Signature:**
 
@@ -154,7 +186,7 @@ toHex (color: string): string
 
 **Arguments**:
 
-- `color: string`        - The color to convert to a hex color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If a hex color is given, a hex color will be returned.
+- `color: string` - The color to convert to a hex color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If a hex color is given, a hex color will be returned.
 
 **Returns**:
 
@@ -167,17 +199,18 @@ toHex (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into a hex color.
 
 #### Example
+
 ```typescript
-toHex("#DC143C")          // returns '#DC143C'
-toHex("DC143C")           // returns '#DC143C'
-toHex("rgb(220, 20, 60)") // returns '#DC143C'
-toHex("crimson")          // returns '#DC143C'
-toHex("hsb(348, 91, 86)") // returns '#DC143C'
+toHex("#DC143C"); // returns '#DC143C'
+toHex("DC143C"); // returns '#DC143C'
+toHex("rgb(220, 20, 60)"); // returns '#DC143C'
+toHex("crimson"); // returns '#DC143C'
+toHex("hsb(348, 91, 86)"); // returns '#DC143C'
 ```
 
 ### `#toRgb()`
 
-*Takes a color and converts it to an RGB color.*
+_Takes a color and converts it to an RGB color._
 
 **Signature:**
 
@@ -187,7 +220,7 @@ toRgb (color: string): string
 
 **Arguments**:
 
-- `color: string`        - The color to convert to an RGB color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If an RGB color is given, an RGB color will be returned.
+- `color: string` - The color to convert to an RGB color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If an RGB color is given, an RGB color will be returned.
 
 **Returns**:
 
@@ -200,17 +233,18 @@ toRgb (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into an RGB color.
 
 #### Example
+
 ```typescript
-toRgb("#DC143C")          // returns 'rgb(220, 20, 60)'
-toRgb("DC143C")           // returns 'rgb(220, 20, 60)'
-toRgb("rgb(220, 20, 60)") // returns 'rgb(220, 20, 60)'
-toRgb("crimson")          // returns 'rgb(220, 20, 60)'
-toRgb("hsb(348, 91, 86)") // returns 'rgb(220, 20, 60)'
+toRgb("#DC143C"); // returns 'rgb(220, 20, 60)'
+toRgb("DC143C"); // returns 'rgb(220, 20, 60)'
+toRgb("rgb(220, 20, 60)"); // returns 'rgb(220, 20, 60)'
+toRgb("crimson"); // returns 'rgb(220, 20, 60)'
+toRgb("hsb(348, 91, 86)"); // returns 'rgb(220, 20, 60)'
 ```
 
 ### `#toHsl()`
 
-*Takes a color and converts it to an HSL color.*
+_Takes a color and converts it to an HSL color._
 
 **Signature:**
 
@@ -220,7 +254,7 @@ toRgb (color: string): string
 
 **Arguments**:
 
-- `color: string`        - The color to convert to an HSL color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If an HSL color is given, an HSL color will be returned.
+- `color: string` - The color to convert to an HSL color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If an HSL color is given, an HSL color will be returned.
 
 **Returns**:
 
@@ -233,18 +267,19 @@ toRgb (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into an HSL color.
 
 #### Example
+
 ```typescript
-toHsl("hsl(348, 83%, 47%)") // returns 'hsl(348, 83%, 47%)'
-toHsl("#DC143C")            // returns 'hsl(348, 83%, 47%)'
-toHsl("DC143C")             // returns 'hsl(348, 83%, 47%)'
-toHsl("rgb(220, 20, 60)")   // returns 'hsl(348, 83%, 47%)'
-toHsl("crimson")            // returns 'hsl(348, 83%, 47%)'
-toHsl("hsb(348, 91, 86)")   // returns 'hsl(348, 83%, 47%)'
+toHsl("hsl(348, 83%, 47%)"); // returns 'hsl(348, 83%, 47%)'
+toHsl("#DC143C"); // returns 'hsl(348, 83%, 47%)'
+toHsl("DC143C"); // returns 'hsl(348, 83%, 47%)'
+toHsl("rgb(220, 20, 60)"); // returns 'hsl(348, 83%, 47%)'
+toHsl("crimson"); // returns 'hsl(348, 83%, 47%)'
+toHsl("hsb(348, 91, 86)"); // returns 'hsl(348, 83%, 47%)'
 ```
 
 ### `#toHsv()`
 
-*Takes a color and converts it to an HSV/HSB color.*
+_Takes a color and converts it to an HSV/HSB color._
 
 **Signature:**
 
@@ -254,7 +289,7 @@ toRgb (color: string): string
 
 **Arguments**:
 
-- `color: string`        - The color to convert to an HSV/HSB color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If an HSV/HSB color is given, an HSV/HSB color will be returned.
+- `color: string` - The color to convert to an HSV/HSB color. Can be any of the color systems CSS can handle with the addition of HSB/HSV. If an HSV/HSB color is given, an HSV/HSB color will be returned.
 
 **Returns**:
 
@@ -267,19 +302,20 @@ toRgb (color: string): string
 - `TypeError` - If the method didn't succeed in normalizing the given argument into an HSVB/HSB color.
 
 #### Example
+
 ```typescript
-toHsv("hsb(348, 91, 86)")   // returns 'hsb(348, 91, 86)'
-toHsv("hsv(348, 91, 86)")   // returns 'hsv(348, 91, 86)'
-toHsv("hsl(348, 83%, 47%)") // returns 'hsb(348, 91, 86)'
-toHsv("#DC143C")            // returns 'hsb(348, 91, 86)'
-toHsv("DC143C")             // returns 'hsb(348, 91, 86)'
-toHsv("rgb(220, 20, 60)")   // returns 'hsb(348, 91, 86)'
-toHsv("crimson")            // returns 'hsb(348, 91, 86)'
+toHsv("hsb(348, 91, 86)"); // returns 'hsb(348, 91, 86)'
+toHsv("hsv(348, 91, 86)"); // returns 'hsv(348, 91, 86)'
+toHsv("hsl(348, 83%, 47%)"); // returns 'hsb(348, 91, 86)'
+toHsv("#DC143C"); // returns 'hsb(348, 91, 86)'
+toHsv("DC143C"); // returns 'hsb(348, 91, 86)'
+toHsv("rgb(220, 20, 60)"); // returns 'hsb(348, 91, 86)'
+toHsv("crimson"); // returns 'hsb(348, 91, 86)'
 ```
 
 ### `#randomHexColor()`
 
-*Generates a random hex color and returns it.*
+_Generates a random hex color and returns it._
 
 **Signature:**
 
@@ -292,15 +328,16 @@ randomHexColor (): string
 `string` - A random hex color. Always starts with '#'.
 
 #### Example
+
 ```typescript
-setInterval(() => document.body.style.backgroundColor = randomHexColor(), 100);
+setInterval(() => (document.body.style.backgroundColor = randomHexColor()), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
 ### `#randomRgbColor()`
 
-*Generates a random RGB color and returns it.*
+_Generates a random RGB color and returns it._
 
 **Signature:**
 
@@ -313,15 +350,16 @@ randomRgbColor (): string
 `string` - A random RGB color.
 
 #### Example
+
 ```typescript
-setInterval(() => document.body.style.backgroundColor = randomRgbColor(), 100);
+setInterval(() => (document.body.style.backgroundColor = randomRgbColor()), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
 ### `#randomHslColor()`
 
-*Generates a random HSL color and returns it.*
+_Generates a random HSL color and returns it._
 
 **Signature:**
 
@@ -334,15 +372,16 @@ randomHslColor (): string
 `string` - A random HSL color.
 
 #### Example
+
 ```typescript
-setInterval(() => document.body.style.backgroundColor = randomHslColor(), 100);
+setInterval(() => (document.body.style.backgroundColor = randomHslColor()), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
 ### `#randomHsvColor()`
 
-*Generates a random HSV color and returns it.*
+_Generates a random HSV color and returns it._
 
 **Signature:**
 
@@ -355,96 +394,69 @@ randomHsvColor (): string
 `string` - A random HSV color.
 
 #### Example
+
 ```typescript
-setInterval(() => document.body.style.backgroundColor = randomHsvColor(), 100);
+setInterval(() => (document.body.style.backgroundColor = randomHsvColor()), 100);
 
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
-
 ### Other methods
-There's a lot of them. The above was the highlights. Everything is well-documented in the source code. Here's a quick overview of the methods that isn't included in this *readme*:
 
-- **`hslStringToHslTuple`:**
-	-	Converts a string-represented HSL color to a tuple of the values.
+There's a lot of them. The above was the highlights. Everything is well-documented in the source code. Here's a quick overview of the methods that isn't included in this _readme_:
 
-- **`hslToHsla`:**
-	-	Generates a HSLA color from a HSL color.
+- **`hslStringToHslTuple`:** - Converts a string-represented HSL color to a tuple of the values.
 
-- **`hslaStringToHslaTuple`:**
-	-	Converts a string-represented HSLa color to a tuple of the values.
+- **`hslToHsla`:** - Generates a HSLA color from a HSL color.
 
-- **`hslToRgbTuple`:**
-	-	Converts the given HSL color to an RGB color and returns it as a tuple of the values.
+- **`hslaStringToHslaTuple`:** - Converts a string-represented HSLa color to a tuple of the values.
 
-- **`hslToRgb`:**
-	-	Converts the given HSL color to an RGB color and returns it as a string.
+- **`hslToRgbTuple`:** - Converts the given HSL color to an RGB color and returns it as a tuple of the values.
 
-- **`hslaToRgbaTuple`:**
-	-	Converts the given HSLa color to an RGBa color and returns it as a tuple of the values.
+- **`hslToRgb`:** - Converts the given HSL color to an RGB color and returns it as a string.
 
-- **`hslaToRgba`:**
-	-	Converts the given HSLa color to an RGBa color and returns it as a string.
+- **`hslaToRgbaTuple`:** - Converts the given HSLa color to an RGBa color and returns it as a tuple of the values.
 
-- **`hslaToHsl`:**
-	-	Converts the given HSLa color to an HSL color and returns it as a string.
+- **`hslaToRgba`:** - Converts the given HSLa color to an RGBa color and returns it as a string.
 
-- **`rgbStringToRgbTuple`:**
-	-	Generates a tuple-representation of an RGB color.
+- **`hslaToHsl`:** - Converts the given HSLa color to an HSL color and returns it as a string.
 
-- **`rgbaStringToRgbaTuple`:**
-	-	Generates a tuple-representation of an RGBa color.
+- **`rgbStringToRgbTuple`:** - Generates a tuple-representation of an RGB color.
 
-- **`rgbToHex`:**
-	-	Generates a hex representation of an RGB color.
+- **`rgbaStringToRgbaTuple`:** - Generates a tuple-representation of an RGBa color.
 
-- **`rgbaToHex`:**
-	-	Generates a hex representation of an RGBa color.
+- **`rgbToHex`:** - Generates a hex representation of an RGB color.
 
-- **`hsvStringToHsvTuple`:**
-	-	Generates a tuple-representation of an HSV/HSB color.
+- **`rgbaToHex`:** - Generates a hex representation of an RGBa color.
 
-- **`hsvToRgbTuple`:**
-	-	Converts an HSV/HSB color to an RGB color and returns it as a tuple of the values.
+- **`hsvStringToHsvTuple`:** - Generates a tuple-representation of an HSV/HSB color.
 
-- **`hsvToRgb`:**
-	-	Converts a HSV color to an RGB color and returns it as a string.
+- **`hsvToRgbTuple`:** - Converts an HSV/HSB color to an RGB color and returns it as a tuple of the values.
 
-- **`hexToRgbTuple`:**
-	-	Generates a RGB version of a hex color and returns it as a tuple of the values.
+- **`hsvToRgb`:** - Converts a HSV color to an RGB color and returns it as a string.
 
-- **`hexToRgb`:**
-	-	Generates a RGB version of a hex color and returns it as a string.
+- **`hexToRgbTuple`:** - Generates a RGB version of a hex color and returns it as a tuple of the values.
 
-- **`hexToHslTuple`:**
-	-	Generates a HSL color from a hex color and returns it as a tuple.
+- **`hexToRgb`:** - Generates a RGB version of a hex color and returns it as a string.
 
-- **`hexToHslaTuple`:**
-	-	Generates a HSLA color from a hex color and returns it as a tuple.
+- **`hexToHslTuple`:** - Generates a HSL color from a hex color and returns it as a tuple.
 
-- **`hexToHsla`:**
-	-	Generates a HSLA color from a hex color and returns it as a string.
+- **`hexToHslaTuple`:** - Generates a HSLA color from a hex color and returns it as a tuple.
 
-- **`hexToHsl`:**
-	-	Generates a HSL color from a hex color and returns it as a string.
+- **`hexToHsla`:** - Generates a HSLA color from a hex color and returns it as a string.
 
-- **`rgbToHslTuple`:**
-	-	Generates a HSL color from a RGB color and returns it as a tuple of the values.
+- **`hexToHsl`:** - Generates a HSL color from a hex color and returns it as a string.
 
-- **`rgbToHsl`:**
-	-	Generates a HSL color from a RGB color and returns it as a string.
+- **`rgbToHslTuple`:** - Generates a HSL color from a RGB color and returns it as a tuple of the values.
 
-- **`rgbToHsvTuple`:**
-	-	Converts an RGB color to an HSV/HSB color and returns it as a tuple of the values.
+- **`rgbToHsl`:** - Generates a HSL color from a RGB color and returns it as a string.
 
-- **`rgbToHsv`:**
-	-	Converts an RGB color to an HSV/HSB color and returns it as a string.
+- **`rgbToHsvTuple`:** - Converts an RGB color to an HSV/HSB color and returns it as a tuple of the values.
 
-- **`randomRgbColor`:**
-	-	Generates a random RGB color and returns it.
+- **`rgbToHsv`:** - Converts an RGB color to an HSV/HSB color and returns it as a string.
 
-- **`randomHslColor`:**
-	-	Generates a random HSL color and returns it.
+- **`randomRgbColor`:** - Generates a random RGB color and returns it.
 
-- **`randomHsvColor`:**
-	-	Generates a random HSV/HSB color and returns it.
+- **`randomHslColor`:** - Generates a random HSL color and returns it.
+
+- **`randomHsvColor`:** - Generates a random HSV/HSB color and returns it.
