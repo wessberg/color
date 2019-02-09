@@ -200,7 +200,7 @@ that look identical to the RGBa color for all color systems, as long as they are
 
 ## Documentation
 
-### #isLight()
+### isLight()
 
 _Determines if the given color is light or not._
 
@@ -224,7 +224,7 @@ isLight (color: string): boolean
 isLight("rgb(234, 205, 244)"); // returns true, that's a pretty light color.
 ```
 
-### #lighten()
+### lighten()
 
 _Changes the lightness of the given color. Will automatically determine the type of color and how to handle it. Pass negative values to darken the color instead._
 
@@ -251,7 +251,7 @@ lighten("#DDACED", 10); // lightens the color 10% and returns the new value: #EA
 lighten("#DDACED", -90); // darkens the color 90% and returns the new value: #1B0721.
 ```
 
-### #saturate()
+### saturate()
 
 _Changes the saturation of the given color. Will automatically determine the type of color and how to handle it. Pass a negative percentage value to desaturate the color instead._
 
@@ -278,7 +278,7 @@ saturate("brown", 100); // saturates the HTML color 'brown' an additional 100%.
 saturate("brown", -100); // desaturates the HTML color 'brown' 100%.
 ```
 
-### #toHex()
+### toHex()
 
 _Takes a color and converts it to a hex color._
 
@@ -312,7 +312,7 @@ toHex("crimson"); // returns '#DC143C'
 toHex("hsb(348, 91, 86)"); // returns '#DC143C'
 ```
 
-### #toRgb()
+### toRgb()
 
 _Takes a color and converts it to an RGB color._
 
@@ -346,7 +346,7 @@ toRgb("crimson"); // returns 'rgb(220, 20, 60)'
 toRgb("hsb(348, 91, 86)"); // returns 'rgb(220, 20, 60)'
 ```
 
-### #toHsl()
+### toHsl()
 
 _Takes a color and converts it to an HSL color._
 
@@ -381,7 +381,7 @@ toHsl("crimson"); // returns 'hsl(348, 83%, 47%)'
 toHsl("hsb(348, 91, 86)"); // returns 'hsl(348, 83%, 47%)'
 ```
 
-### #toHsv()
+### toHsv()
 
 _Takes a color and converts it to an HSV/HSB color._
 
@@ -417,7 +417,7 @@ toHsv("rgb(220, 20, 60)"); // returns 'hsb(348, 91, 86)'
 toHsv("crimson"); // returns 'hsb(348, 91, 86)'
 ```
 
-### #randomHexColor()
+### randomHexColor()
 
 _Generates a random hex color and returns it._
 
@@ -439,7 +439,7 @@ setInterval(() => (document.body.style.backgroundColor = randomHexColor()), 100)
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
-### #randomRgbColor()
+### randomRgbColor()
 
 _Generates a random RGB color and returns it._
 
@@ -461,7 +461,7 @@ setInterval(() => (document.body.style.backgroundColor = randomRgbColor()), 100)
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
-### #randomHslColor()
+### randomHslColor()
 
 _Generates a random HSL color and returns it._
 
@@ -483,7 +483,7 @@ setInterval(() => (document.body.style.backgroundColor = randomHslColor()), 100)
 // Makes the background of the body element change to a new random color every 100ms. Welcome back to web 1.0!
 ```
 
-### #randomHsvColor()
+### randomHsvColor()
 
 _Generates a random HSV color and returns it._
 
