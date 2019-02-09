@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/wessberg/color/compare/v1.0.0...v1.0.1) (2019-01-21)
+
+### Bug Fixes
+
+- **readme:** fix logo dimensions ([aac0acd](https://github.com/wessberg/color/commit/aac0acd))
+
 # [1.0.0](https://github.com/wessberg/color/compare/v0.0.2...v1.0.0) (2019-01-21)
 
 ### Bug Fixes
