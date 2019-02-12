@@ -1174,11 +1174,11 @@ test("#saturateHsl() => Throws an exception if the first argument is not a prope
 });
 
 test("#saturateHsl() => Returns a saturated version of the given HSL color. #1", t => {
-	t.deepEqual(saturateHsl("hsl(50, 50, 80)"), "hsl(50, 55%, 80%)");
+	t.deepEqual(saturateHsl("hsl(50, 50, 80)"), "hsl(50, 60%, 80%)");
 });
 
 test("#saturateHsl() => Returns a saturated version of the given HSL color. #2", t => {
-	t.deepEqual(saturateHsl("hsl(50, 50, 80)", 10), "hsl(50, 55%, 80%)");
+	t.deepEqual(saturateHsl("hsl(50, 50, 80)", 10), "hsl(50, 60%, 80%)");
 });
 
 test("#saturateHsl() => Returns a saturated version of the given HSL color. #3", t => {
@@ -1186,11 +1186,11 @@ test("#saturateHsl() => Returns a saturated version of the given HSL color. #3",
 });
 
 test("#saturateHsl() => Returns a less saturated version of the given HSL color for negative values. #1", t => {
-	t.deepEqual(saturateHsl("hsl(50, 50, 80)", -10), "hsl(50, 45%, 80%)");
+	t.deepEqual(saturateHsl("hsl(50, 50, 80)", -10), "hsl(50, 40%, 80%)");
 });
 
 test("#saturateHsl() => Returns a less saturated version of the given HSL color for negative values. #2", t => {
-	t.deepEqual(saturateHsl("hsl(50, 50, 80)", -95), "hsl(50, 2.5%, 80%)");
+	t.deepEqual(saturateHsl("hsl(50, 50, 80)", -95), "hsl(50, 0%, 80%)");
 });
 
 test("#saturateHsl() => Never goes beyond 100%", t => {
@@ -1211,11 +1211,11 @@ test("#saturateHsla() => Throws an exception if the first argument is not a prop
 });
 
 test("#saturateHsla() => Returns a saturated version of the given HSLa color. #1", t => {
-	t.deepEqual(saturateHsla("hsla(50, 50, 80, 1)"), "hsla(50, 55%, 80%, 1)");
+	t.deepEqual(saturateHsla("hsla(50, 50, 80, 1)"), "hsla(50, 60%, 80%, 1)");
 });
 
 test("#saturateHsla() => Returns a saturated version of the given HSLa color. #2", t => {
-	t.deepEqual(saturateHsla("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 55%, 80%, 0.5)");
+	t.deepEqual(saturateHsla("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 60%, 80%, 0.5)");
 });
 
 test("#saturateHsla() => Returns a saturated version of the given HSLa color. #3", t => {
@@ -1223,11 +1223,11 @@ test("#saturateHsla() => Returns a saturated version of the given HSLa color. #3
 });
 
 test("#saturateHsla() => Returns a less saturated version of the given HSLa color for negative values. #1", t => {
-	t.deepEqual(saturateHsla("hsla(50, 50, 80, 1)", -10), "hsla(50, 45%, 80%, 1)");
+	t.deepEqual(saturateHsla("hsla(50, 50, 80, 1)", -10), "hsla(50, 40%, 80%, 1)");
 });
 
 test("#saturateHsla() => Returns a less saturated version of the given HSLa color for negative values. #2", t => {
-	t.deepEqual(saturateHsla("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 2.5%, 80%, 0.6)");
+	t.deepEqual(saturateHsla("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 0%, 80%, 0.6)");
 });
 
 test("#saturateHsla() => Never goes beyond 100%", t => {
@@ -1248,19 +1248,19 @@ test("#saturateRgb() => Throws an exception if the first argument is not a prope
 });
 
 test("#saturateRgb() => Returns a saturated version of the given RGB color. #1", t => {
-	t.deepEqual(saturateRgb("rgb(23, 30, 129)"), "rgb(18, 25, 135)");
+	t.deepEqual(saturateRgb("rgb(23, 30, 129)"), "rgb(15, 23, 138)");
 });
 
 test("#saturateRgb() => Returns a saturated version of the given RGB color. #2", t => {
-	t.deepEqual(saturateRgb("rgb(77, 147, 210)", 10), "rgb(69, 148, 217)");
+	t.deepEqual(saturateRgb("rgb(77, 147, 210)", 10), "rgb(64, 148, 221)");
 });
 
 test("#saturateRgb() => Returns a less saturated version of the given RGB color for negative values. #1", t => {
-	t.deepEqual(saturateRgb("rgb(77, 147, 210)", -10), "rgb(82, 147, 203)");
+	t.deepEqual(saturateRgb("rgb(77, 147, 210)", -10), "rgb(87, 147, 199)");
 });
 
 test("#saturateRgb() => Returns a less saturated version of the given RGB color for negative values. #2", t => {
-	t.deepEqual(saturateRgb("rgb(23, 30, 129)", -90), "rgb(71, 72, 82)");
+	t.deepEqual(saturateRgb("rgb(23, 30, 129)", -90), "rgb(77, 77, 77)");
 });
 
 test("#saturateRgba() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1273,19 +1273,19 @@ test("#saturateRgba() => Throws an exception if the first argument is not a prop
 });
 
 test("#saturateRgba() => Returns a saturated version of the given RGBa color. #1", t => {
-	t.deepEqual(saturateRgba("rgba(23, 30, 129, 1)"), "rgba(18, 25, 135, 1)");
+	t.deepEqual(saturateRgba("rgba(23, 30, 129, 1)"), "rgba(15, 23, 138, 1)");
 });
 
 test("#saturateRgba() => Returns a saturated version of the given RGBa color. #2", t => {
-	t.deepEqual(saturateRgba("rgba(77, 147, 210, 0.5)", 10), "rgba(69, 148, 217, 0.5)");
+	t.deepEqual(saturateRgba("rgba(77, 147, 210, 0.5)", 10), "rgba(64, 148, 221, 0.5)");
 });
 
 test("#saturateRgba() => Returns a less saturated version of the given RGBa color for negative values. #1", t => {
-	t.deepEqual(saturateRgba("rgba(77, 147, 210, 0)", -10), "rgba(82, 147, 203, 0)");
+	t.deepEqual(saturateRgba("rgba(77, 147, 210, 0)", -10), "rgba(87, 147, 199, 0)");
 });
 
 test("#saturateRgba() => Returns a less saturated version of the given RGBa color for negative values. #2", t => {
-	t.deepEqual(saturateRgba("rgba(23, 30, 129, 0.2)", -90), "rgba(71, 72, 82, 0.2)");
+	t.deepEqual(saturateRgba("rgba(23, 30, 129, 0.2)", -90), "rgba(77, 77, 77, 0.2)");
 });
 
 test("#saturateHex() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1298,19 +1298,19 @@ test("#saturateHex() => Throws an exception if the first argument is not a prope
 });
 
 test("#saturateHex() => Returns a saturated version of the given hex color. #1", t => {
-	t.deepEqual(saturateHex("#a3a3b3"), "#a2a2b4");
+	t.deepEqual(saturateHex("#a3a3b3"), "#9a9abc");
 });
 
 test("#saturateHex() => Returns a saturated version of the given hex color. #2", t => {
-	t.deepEqual(saturateHex("#ddace3"), "#dfa8e6");
+	t.deepEqual(saturateHex("#ddace3"), "#e1a5e9");
 });
 
 test("#saturateHex() => Returns a less saturated version of the given hex color for negative values. #1", t => {
-	t.deepEqual(saturateHex("#a3a3b3", -10), "#a3a3b2");
+	t.deepEqual(saturateHex("#a3a3b3", -10), "#ababab");
 });
 
 test("#saturateHex() => Returns a less saturated version of the given hex color for negative values. #2", t => {
-	t.deepEqual(saturateHex("#ddace3", -90), "#c9c4ca");
+	t.deepEqual(saturateHex("#ddace3", -90), "#c7c7c7");
 });
 
 test("#saturateHsv() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1323,47 +1323,47 @@ test("#saturateHsv() => Throws an exception if the first argument is not a prope
 });
 
 test("#saturateHsv() => Returns a saturated version of the given HSV/HSB color. #1", t => {
-	t.deepEqual(saturateHsv("hsb(290, 10, 79)"), "hsb(290, 11, 79)");
+	t.deepEqual(saturateHsv("hsb(290, 10, 79)"), "hsb(291, 16, 82)");
 });
 
 test("#saturateHsv() => Returns a saturated version of the given HSV/HSB color. #2", t => {
-	t.deepEqual(saturateHsv("hsb(290, 10, 79)", 10), "hsb(290, 11, 79)");
+	t.deepEqual(saturateHsv("hsb(290, 10, 79)", 10), "hsb(291, 16, 82)");
 });
 
 test("#saturateHsv() => Returns a saturated version of the given HSV/HSB color. #3", t => {
-	t.deepEqual(saturateHsv("hsb(290, 10, 79)", 90), "hsb(290, 19, 79)");
+	t.deepEqual(saturateHsv("hsb(290, 10, 79)", 90), "hsb(291, 50, 100)");
 });
 
 test("#saturateHsv() => Returns a less saturated version of the given HSV/HSB color for negative values. #1", t => {
-	t.deepEqual(saturateHsv("hsb(120, 40, 80)", -10), "hsb(120, 36, 80)");
+	t.deepEqual(saturateHsv("hsb(120, 40, 80)", -10), "hsb(120, 33, 76)");
 });
 
 test("#saturateHsv() => Returns a less saturated version of the given HSV/HSB color for negative values. #2", t => {
-	t.deepEqual(saturateHsv("hsb(120, 40, 80)", -90), "hsb(120, 4, 80)");
+	t.deepEqual(saturateHsv("hsb(120, 40, 80)", -90), "hsb(0, 0, 64)");
 });
 
 test("#saturate() => Returns a saturated version of a given RGB color. #1", t => {
-	t.deepEqual(saturate("rgb(23, 30, 129)"), "rgb(18, 25, 135)");
+	t.deepEqual(saturate("rgb(23, 30, 129)"), "rgb(15, 23, 138)");
 });
 
 test("#saturate() => Returns a saturated version of a given RGB color. #2", t => {
-	t.deepEqual(saturate("rgb(77, 147, 210)", 10), "rgb(69, 148, 217)");
+	t.deepEqual(saturate("rgb(77, 147, 210)", 10), "rgb(64, 148, 221)");
 });
 
 test("#saturate() => Returns a less saturated version of a given RGB color for negative values. #1", t => {
-	t.deepEqual(saturate("rgb(77, 147, 210)", -10), "rgb(82, 147, 203)");
+	t.deepEqual(saturate("rgb(77, 147, 210)", -10), "rgb(87, 147, 199)");
 });
 
 test("#saturate() => Returns a less saturated version of a given RGB color for negative values. #2", t => {
-	t.deepEqual(saturate("rgb(23, 30, 129)", -90), "rgb(71, 72, 82)");
+	t.deepEqual(saturate("rgb(23, 30, 129)", -90), "rgb(77, 77, 77)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSL color. #1", t => {
-	t.deepEqual(saturate("hsl(50, 50, 80)"), "hsl(50, 55%, 80%)");
+	t.deepEqual(saturate("hsl(50, 50, 80)"), "hsl(50, 60%, 80%)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSL color. #2", t => {
-	t.deepEqual(saturate("hsl(50, 50, 80)", 10), "hsl(50, 55%, 80%)");
+	t.deepEqual(saturate("hsl(50, 50, 80)", 10), "hsl(50, 60%, 80%)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSL color. #3", t => {
@@ -1371,11 +1371,11 @@ test("#saturate() => Returns a saturated version of a given HSL color. #3", t =>
 });
 
 test("#saturate() => Returns a less saturated version of a given HSL color for negative values. #1", t => {
-	t.deepEqual(saturate("hsl(50, 50, 80)", -10), "hsl(50, 45%, 80%)");
+	t.deepEqual(saturate("hsl(50, 50, 80)", -10), "hsl(50, 40%, 80%)");
 });
 
 test("#saturate() => Returns a less saturated version of a given HSL color for negative values. #2", t => {
-	t.deepEqual(saturate("hsl(50, 50, 80)", -95), "hsl(50, 2.5%, 80%)");
+	t.deepEqual(saturate("hsl(50, 50, 80)", -95), "hsl(50, 0%, 80%)");
 });
 
 test("#saturate() => Never goes beyond 100% for HSL colors", t => {
@@ -1387,47 +1387,47 @@ test("#saturate() => Never goes below 0% for HSL colors", t => {
 });
 
 test("#saturate() => Returns a saturated version of a given HSV/HSB color. #1", t => {
-	t.deepEqual(saturate("hsb(290, 10, 79)"), "hsb(290, 11, 79)");
+	t.deepEqual(saturate("hsb(290, 10, 79)"), "hsb(291, 16, 82)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSV/HSB color. #2", t => {
-	t.deepEqual(saturate("hsb(290, 10, 79)", 10), "hsb(290, 11, 79)");
+	t.deepEqual(saturate("hsb(290, 10, 79)", 10), "hsb(291, 16, 82)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSV/HSB color. #3", t => {
-	t.deepEqual(saturate("hsb(290, 10, 79)", 90), "hsb(290, 19, 79)");
+	t.deepEqual(saturate("hsb(290, 10, 79)", 90), "hsb(291, 50, 100)");
 });
 
 test("#saturate() => Returns a less saturated version of a given HSV/HSB color for negative values. #1", t => {
-	t.deepEqual(saturate("hsb(120, 40, 80)", -10), "hsb(120, 36, 80)");
+	t.deepEqual(saturate("hsb(120, 40, 80)", -10), "hsb(120, 33, 76)");
 });
 
 test("#saturate() => Returns a less saturated version of a given HSV/HSB color for negative values. #2", t => {
-	t.deepEqual(saturate("hsb(120, 40, 80)", -90), "hsb(120, 4, 80)");
+	t.deepEqual(saturate("hsb(120, 40, 80)", -90), "hsb(0, 0, 64)");
 });
 
 test("#saturate() => Returns a saturated version of a given RGBa color. #1", t => {
-	t.deepEqual(saturate("rgba(23, 30, 129, 1)"), "rgba(18, 25, 135, 1)");
+	t.deepEqual(saturate("rgba(23, 30, 129, 1)"), "rgba(15, 23, 138, 1)");
 });
 
 test("#saturate() => Returns a saturated version of a given RGBa color. #2", t => {
-	t.deepEqual(saturate("rgba(77, 147, 210, 0.5)", 10), "rgba(69, 148, 217, 0.5)");
+	t.deepEqual(saturate("rgba(77, 147, 210, 0.5)", 10), "rgba(64, 148, 221, 0.5)");
 });
 
 test("#saturate() => Returns a less saturated version of a given RGBa color for negative values. #1", t => {
-	t.deepEqual(saturate("rgba(77, 147, 210, 0)", -10), "rgba(82, 147, 203, 0)");
+	t.deepEqual(saturate("rgba(77, 147, 210, 0)", -10), "rgba(87, 147, 199, 0)");
 });
 
 test("#saturate() => Returns a less saturated version of a given RGBa color for negative values. #2", t => {
-	t.deepEqual(saturate("rgba(23, 30, 129, 0.2)", -90), "rgba(71, 72, 82, 0.2)");
+	t.deepEqual(saturate("rgba(23, 30, 129, 0.2)", -90), "rgba(77, 77, 77, 0.2)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSLa color. #1", t => {
-	t.deepEqual(saturate("hsla(50, 50, 80, 1)"), "hsla(50, 55%, 80%, 1)");
+	t.deepEqual(saturate("hsla(50, 50, 80, 1)"), "hsla(50, 60%, 80%, 1)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSLa color. #2", t => {
-	t.deepEqual(saturate("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 55%, 80%, 0.5)");
+	t.deepEqual(saturate("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 60%, 80%, 0.5)");
 });
 
 test("#saturate() => Returns a saturated version of a given HSLa color. #3", t => {
@@ -1435,11 +1435,11 @@ test("#saturate() => Returns a saturated version of a given HSLa color. #3", t =
 });
 
 test("#saturate() => Returns a less saturated version of a given HSLa color for negative values. #1", t => {
-	t.deepEqual(saturate("hsla(50, 50, 80, 1)", -10), "hsla(50, 45%, 80%, 1)");
+	t.deepEqual(saturate("hsla(50, 50, 80, 1)", -10), "hsla(50, 40%, 80%, 1)");
 });
 
 test("#saturate() => Returns a less saturated version of a given HSLa color for negative values. #2", t => {
-	t.deepEqual(saturate("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 2.5%, 80%, 0.6)");
+	t.deepEqual(saturate("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 0%, 80%, 0.6)");
 });
 
 test("#saturate() => Never goes beyond 100% for HSLa colors", t => {
@@ -1451,19 +1451,19 @@ test("#saturate() => Never goes below 0% for HSLa colors", t => {
 });
 
 test("#saturate() => Returns a saturated version of a given hex color. #1", t => {
-	t.deepEqual(saturate("#a3a3b3"), "#a2a2b4");
+	t.deepEqual(saturate("#a3a3b3"), "#9a9abc");
 });
 
 test("#saturate() => Returns a saturated version of a given hex color. #2", t => {
-	t.deepEqual(saturate("#ddace3"), "#dfa8e6");
+	t.deepEqual(saturate("#ddace3"), "#e1a5e9");
 });
 
 test("#saturate() => Returns a less saturated version of a given hex color for negative values. #1", t => {
-	t.deepEqual(saturate("#a3a3b3", -10), "#a3a3b2");
+	t.deepEqual(saturate("#a3a3b3", -10), "#ababab");
 });
 
 test("#saturate() => Returns a less saturated version of a given hex color for negative values. #2", t => {
-	t.deepEqual(saturate("#ddace3", -90), "#c9c4ca");
+	t.deepEqual(saturate("#ddace3", -90), "#c7c7c7");
 });
 
 test("#lightenHsl() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1476,23 +1476,23 @@ test("#lightenHsl() => Throws an exception if the first argument is not a proper
 });
 
 test("#lightenHsl() => Returns a lightened version of the given HSL color. #1", t => {
-	t.deepEqual(lightenHsl("hsl(50, 50, 80)"), "hsl(50, 50%, 88%)");
+	t.deepEqual(lightenHsl("hsl(50, 50, 80)"), "hsl(50, 50%, 90%)");
 });
 
 test("#lightenHsl() => Returns a lightened version of the given HSL color. #2", t => {
-	t.deepEqual(lightenHsl("hsl(50, 50, 80)", 10), "hsl(50, 50%, 88%)");
+	t.deepEqual(lightenHsl("hsl(50, 50, 80)", 10), "hsl(50, 50%, 90%)");
 });
 
 test("#lightenHsl() => Returns a lightened version of the given HSL color. #3", t => {
-	t.deepEqual(lightenHsl("hsl(50, 50, 10)", 100), "hsl(50, 50%, 20%)");
+	t.deepEqual(lightenHsl("hsl(50, 50, 10)", 100), "hsl(50, 50%, 100%)");
 });
 
 test("#lightenHsl() => Returns a less lightened version of the given HSL color for negative values. #1", t => {
-	t.deepEqual(lightenHsl("hsl(50, 50, 80)", -10), "hsl(50, 50%, 72%)");
+	t.deepEqual(lightenHsl("hsl(50, 50, 80)", -10), "hsl(50, 50%, 70%)");
 });
 
 test("#lightenHsl() => Returns a less lightened version of the given HSL color for negative values. #2", t => {
-	t.deepEqual(lightenHsl("hsl(50, 50, 80)", -95), "hsl(50, 50%, 4%)");
+	t.deepEqual(lightenHsl("hsl(50, 50, 80)", -25), "hsl(50, 50%, 55%)");
 });
 
 test("#lightenHsl() => Never goes beyond 100%", t => {
@@ -1513,23 +1513,23 @@ test("#lightenHsla() => Throws an exception if the first argument is not a prope
 });
 
 test("#lightenHsla() => Returns a lightened version of the given HSLa color. #1", t => {
-	t.deepEqual(lightenHsla("hsla(50, 50, 80, 1)"), "hsla(50, 50%, 88%, 1)");
+	t.deepEqual(lightenHsla("hsla(50, 50, 80, 1)"), "hsla(50, 50%, 90%, 1)");
 });
 
 test("#lightenHsla() => Returns a lightened version of the given HSLa color. #2", t => {
-	t.deepEqual(lightenHsla("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 50%, 88%, 0.5)");
+	t.deepEqual(lightenHsla("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 50%, 90%, 0.5)");
 });
 
 test("#lightenHsla() => Returns a lightened version of the given HSLa color. #3", t => {
-	t.deepEqual(lightenHsla("hsla(50, 50, 10, 0)", 100), "hsla(50, 50%, 20%, 0)");
+	t.deepEqual(lightenHsla("hsla(50, 50, 10, 0)", 100), "hsla(50, 50%, 100%, 0)");
 });
 
 test("#lightenHsla() => Returns a less lightened version of the given HSLa color for negative values. #1", t => {
-	t.deepEqual(lightenHsla("hsla(50, 50, 80, 1)", -10), "hsla(50, 50%, 72%, 1)");
+	t.deepEqual(lightenHsla("hsla(50, 50, 80, 1)", -10), "hsla(50, 50%, 70%, 1)");
 });
 
 test("#lightenHsla() => Returns a less lightened version of the given HSLa color for negative values. #2", t => {
-	t.deepEqual(lightenHsla("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 50%, 4%, 0.6)");
+	t.deepEqual(lightenHsla("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 50%, 0%, 0.6)");
 });
 
 test("#lightenHsla() => Never goes beyond 100%", t => {
@@ -1550,19 +1550,19 @@ test("#lightenRgb() => Throws an exception if the first argument is not a proper
 });
 
 test("#lightenRgb() => Returns a lightened version of the given RGB color. #1", t => {
-	t.deepEqual(lightenRgb("rgb(23, 30, 129)"), "rgb(25, 33, 143)");
+	t.deepEqual(lightenRgb("rgb(23, 30, 129)"), "rgb(31, 40, 173)");
 });
 
 test("#lightenRgb() => Returns a lightened version of the given RGB color. #2", t => {
-	t.deepEqual(lightenRgb("rgb(231, 175, 212)", 10), "rgb(241, 208, 230)");
+	t.deepEqual(lightenRgb("rgb(231, 175, 212)", 10), "rgb(243, 216, 234)");
 });
 
 test("#lightenRgb() => Returns a less lightened version of the given RGB color for negative values. #1", t => {
-	t.deepEqual(lightenRgb("rgb(231, 175, 212)", -10), "rgb(222, 145, 196)");
+	t.deepEqual(lightenRgb("rgb(231, 175, 212)", -10), "rgb(220, 137, 192)");
 });
 
 test("#lightenRgb() => Returns a less lightened version of the given RGB color for negative values. #2", t => {
-	t.deepEqual(lightenRgb("rgb(23, 30, 129)", -90), "rgb(2, 3, 13)");
+	t.deepEqual(lightenRgb("rgb(23, 30, 129)", -90), "rgb(0, 0, 0)");
 });
 
 test("#lightenRgba() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1575,19 +1575,19 @@ test("#lightenRgba() => Throws an exception if the first argument is not a prope
 });
 
 test("#lightenRgba() => Returns a lightened version of the given RGBa color. #1", t => {
-	t.deepEqual(lightenRgba("rgba(23, 30, 129, 1)"), "rgba(25, 33, 143, 1)");
+	t.deepEqual(lightenRgba("rgba(23, 30, 129, 1)"), "rgba(31, 40, 173, 1)");
 });
 
 test("#lightenRgba() => Returns a lightened version of the given RGBa color. #2", t => {
-	t.deepEqual(lightenRgba("rgba(231, 175, 212, 0.5)", 10), "rgba(241, 208, 230, 0.5)");
+	t.deepEqual(lightenRgba("rgba(231, 175, 212, 0.5)", 10), "rgba(243, 216, 234, 0.5)");
 });
 
 test("#lightenRgba() => Returns a less lightened version of the given RGBa color for negative values. #1", t => {
-	t.deepEqual(lightenRgba("rgba(231, 175, 212, 0)", -10), "rgba(222, 145, 196, 0)");
+	t.deepEqual(lightenRgba("rgba(231, 175, 212, 0)", -10), "rgba(220, 137, 192, 0)");
 });
 
 test("#lightenRgba() => Returns a less lightened version of the given RGBa color for negative values. #2", t => {
-	t.deepEqual(lightenRgba("rgba(23, 30, 129, 0.2)", -90), "rgba(2, 3, 13, 0.2)");
+	t.deepEqual(lightenRgba("rgba(23, 30, 129, 0.2)", -90), "rgba(0, 0, 0, 0.2)");
 });
 
 test("#lightenHex() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1600,19 +1600,19 @@ test("#lightenHex() => Throws an exception if the first argument is not a proper
 });
 
 test("#lightenHex() => Returns a lightened version of the given hex color. #1", t => {
-	t.deepEqual(lightenHex("#af0"), "#b2ff1a");
+	t.deepEqual(lightenHex("#af0"), "#bbff33");
 });
 
 test("#lightenHex() => Returns a lightened version of the given hex color. #2", t => {
-	t.deepEqual(lightenHex("#ddaced"), "#eacdf4");
+	t.deepEqual(lightenHex("#ddaced"), "#eed5f6");
 });
 
 test("#lightenHex() => Returns a less lightened version of the given hex color for negative values. #1", t => {
-	t.deepEqual(lightenHex("#af0", -10), "#99e600");
+	t.deepEqual(lightenHex("#af0", -10), "#88cc00");
 });
 
 test("#lightenHex() => Returns a less lightened version of the given hex color for negative values. #2", t => {
-	t.deepEqual(lightenHex("#ddaced", -90), "#1b0721");
+	t.deepEqual(lightenHex("#ddaced", -30), "#a82ed1");
 });
 
 test("#lightenHsv() => Throws an exception if the first argument is not of type 'string'", t => {
@@ -1625,59 +1625,59 @@ test("#lightenHsv() => Throws an exception if the first argument is not a proper
 });
 
 test("#lightenHsv() => Returns a lightened version of the given HSV/HSB color. #1", t => {
-	t.deepEqual(lightenHsv("hsb(290, 10, 84)"), "hsb(291, 6, 91)");
+	t.deepEqual(lightenHsv("hsb(290, 10, 84)"), "hsb(289, 5, 92)");
 });
 
 test("#lightenHsv() => Returns a lightened version of the given HSV/HSB color. #2", t => {
-	t.deepEqual(lightenHsv("hsb(359, 12, 53)", 10), "hsb(0, 10, 58)");
+	t.deepEqual(lightenHsv("hsb(359, 12, 53)", 10), "hsb(0, 8, 62)");
 });
 
 test("#lightenHsv() => Returns a lightened version of the given HSV/HSB color. #3", t => {
-	t.deepEqual(lightenHsv("hsb(290, 10, 32)", 90), "hsb(286, 9, 60)");
+	t.deepEqual(lightenHsv("hsb(290, 10, 32)", 90), "hsb(0, 0, 100)");
 });
 
 test("#lightenHsv() => Returns a less lightened version of the given HSV/HSB color for negative values. #1", t => {
-	t.deepEqual(lightenHsv("hsb(290, 10, 84)", -10), "hsb(292, 15, 78)");
+	t.deepEqual(lightenHsv("hsb(290, 10, 84)", -10), "hsb(290, 16, 76)");
 });
 
 test("#lightenHsv() => Returns a less lightened version of the given HSV/HSB color for negative values. #2", t => {
-	t.deepEqual(lightenHsv("hsb(359, 12, 53)", -90), "hsb(0, 14, 5)");
+	t.deepEqual(lightenHsv("hsb(359, 12, 53)", -30), "hsb(0, 11, 21)");
 });
 
 test("#lighten() => Returns a lightened version of a given RGBa color. #1", t => {
-	t.deepEqual(lighten("rgba(23, 30, 129, 1)"), "rgba(25, 33, 143, 1)");
+	t.deepEqual(lighten("rgba(23, 30, 129, 1)"), "rgba(31, 40, 173, 1)");
 });
 
 test("#lighten() => Returns a lightened version of a given RGBa color. #2", t => {
-	t.deepEqual(lighten("rgba(231, 175, 212, 0.5)", 10), "rgba(241, 208, 230, 0.5)");
+	t.deepEqual(lighten("rgba(231, 175, 212, 0.5)", 10), "rgba(243, 216, 234, 0.5)");
 });
 
 test("#lighten() => Returns a less lightened version of a given RGBa color for negative values. #1", t => {
-	t.deepEqual(lighten("rgba(231, 175, 212, 0)", -10), "rgba(222, 145, 196, 0)");
+	t.deepEqual(lighten("rgba(231, 175, 212, 0)", -10), "rgba(220, 137, 192, 0)");
 });
 
 test("#lighten() => Returns a less lightened version of a given RGBa color for negative values. #2", t => {
-	t.deepEqual(lighten("rgba(23, 30, 129, 0.2)", -90), "rgba(2, 3, 13, 0.2)");
+	t.deepEqual(lighten("rgba(23, 30, 129, 0.2)", -90), "rgba(0, 0, 0, 0.2)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSLa color. #1", t => {
-	t.deepEqual(lighten("hsla(50, 50, 80, 1)"), "hsla(50, 50%, 88%, 1)");
+	t.deepEqual(lighten("hsla(50, 50, 80, 1)"), "hsla(50, 50%, 90%, 1)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSLa color. #2", t => {
-	t.deepEqual(lighten("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 50%, 88%, 0.5)");
+	t.deepEqual(lighten("hsla(50, 50, 80, 0.5)", 10), "hsla(50, 50%, 90%, 0.5)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSLa color. #3", t => {
-	t.deepEqual(lighten("hsla(50, 50, 10, 0)", 100), "hsla(50, 50%, 20%, 0)");
+	t.deepEqual(lighten("hsla(50, 50, 10, 0)", 100), "hsla(50, 50%, 100%, 0)");
 });
 
 test("#lighten() => Returns a less lightened version of a given HSLa color for negative values. #1", t => {
-	t.deepEqual(lighten("hsla(50, 50, 80, 1)", -10), "hsla(50, 50%, 72%, 1)");
+	t.deepEqual(lighten("hsla(50, 50, 80, 1)", -10), "hsla(50, 50%, 70%, 1)");
 });
 
 test("#lighten() => Returns a less lightened version of a given HSLa color for negative values. #2", t => {
-	t.deepEqual(lighten("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 50%, 4%, 0.6)");
+	t.deepEqual(lighten("hsla(50, 50, 80, 0.6)", -95), "hsla(50, 50%, 0%, 0.6)");
 });
 
 test("#lighten() => Never goes beyond 100% for HSLa values", t => {
@@ -1689,39 +1689,39 @@ test("#lighten() => Never goes below 0% for HSLa values", t => {
 });
 
 test("#lighten() => Returns a lightened version of a given RGB color. #1", t => {
-	t.deepEqual(lighten("rgb(23, 30, 129)"), "rgb(25, 33, 143)");
+	t.deepEqual(lighten("rgb(23, 30, 129)"), "rgb(31, 40, 173)");
 });
 
 test("#lighten() => Returns a lightened version of a given RGB color. #2", t => {
-	t.deepEqual(lighten("rgb(231, 175, 212)", 10), "rgb(241, 208, 230)");
+	t.deepEqual(lighten("rgb(231, 175, 212)", 10), "rgb(243, 216, 234)");
 });
 
 test("#lighten() => Returns a less lightened version of a given RGB color for negative values. #1", t => {
-	t.deepEqual(lighten("rgb(231, 175, 212)", -10), "rgb(222, 145, 196)");
+	t.deepEqual(lighten("rgb(231, 175, 212)", -10), "rgb(220, 137, 192)");
 });
 
 test("#lighten() => Returns a less lightened version of a given RGB color for negative values. #2", t => {
-	t.deepEqual(lighten("rgb(23, 30, 129)", -90), "rgb(2, 3, 13)");
+	t.deepEqual(lighten("rgb(23, 30, 129)", -90), "rgb(0, 0, 0)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSL color. #1", t => {
-	t.deepEqual(lighten("hsl(50, 50, 80)"), "hsl(50, 50%, 88%)");
+	t.deepEqual(lighten("hsl(50, 50, 80)"), "hsl(50, 50%, 90%)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSL color. #2", t => {
-	t.deepEqual(lighten("hsl(50, 50, 80)", 10), "hsl(50, 50%, 88%)");
+	t.deepEqual(lighten("hsl(50, 50, 80)", 10), "hsl(50, 50%, 90%)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSL color. #3", t => {
-	t.deepEqual(lighten("hsl(50, 50, 10)", 100), "hsl(50, 50%, 20%)");
+	t.deepEqual(lighten("hsl(50, 50, 10)", 100), "hsl(50, 50%, 100%)");
 });
 
 test("#lighten() => Returns a less lightened version of a given HSL color for negative values. #1", t => {
-	t.deepEqual(lighten("hsl(50, 50, 80)", -10), "hsl(50, 50%, 72%)");
+	t.deepEqual(lighten("hsl(50, 50, 80)", -10), "hsl(50, 50%, 70%)");
 });
 
 test("#lighten() => Returns a less lightened version of a given HSL color for negative values. #2", t => {
-	t.deepEqual(lighten("hsl(50, 50, 80)", -95), "hsl(50, 50%, 4%)");
+	t.deepEqual(lighten("hsl(50, 50, 80)", -95), "hsl(50, 50%, 0%)");
 });
 
 test("#lighten() => Never goes beyond 100% for HSL values", t => {
@@ -1733,39 +1733,39 @@ test("#lighten() => Never goes below 0% for HSL values", t => {
 });
 
 test("#lighten() => Returns a lightened version of a given HSV/HSB color. #1", t => {
-	t.deepEqual(lighten("hsb(290, 10, 84)"), "hsb(291, 6, 91)");
+	t.deepEqual(lighten("hsb(290, 10, 84)"), "hsb(289, 5, 92)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSV/HSB color. #2", t => {
-	t.deepEqual(lighten("hsb(359, 12, 53)", 10), "hsb(0, 10, 58)");
+	t.deepEqual(lighten("hsb(359, 12, 53)", 10), "hsb(0, 8, 62)");
 });
 
 test("#lighten() => Returns a lightened version of a given HSV/HSB color. #3", t => {
-	t.deepEqual(lighten("hsb(290, 10, 32)", 90), "hsb(286, 9, 60)");
+	t.deepEqual(lighten("hsb(290, 10, 32)", 90), "hsb(0, 0, 100)");
 });
 
 test("#lighten() => Returns a less lightened version of a given HSV/HSB color for negative values. #1", t => {
-	t.deepEqual(lighten("hsb(290, 10, 84)", -10), "hsb(292, 15, 78)");
+	t.deepEqual(lighten("hsb(290, 10, 84)", -10), "hsb(290, 16, 76)");
 });
 
 test("#lighten() => Returns a less lightened version of a given HSV/HSB color for negative values. #2", t => {
-	t.deepEqual(lighten("hsb(359, 12, 53)", -90), "hsb(0, 14, 5)");
+	t.deepEqual(lighten("hsb(359, 12, 53)", -20), "hsb(0, 11, 32)");
 });
 
 test("#lighten() => Returns a lightened version of a given hex color. #1", t => {
-	t.deepEqual(lighten("#af0"), "#b2ff1a");
+	t.deepEqual(lighten("#af0"), "#bbff33");
 });
 
 test("#lighten() => Returns a lightened version of a given hex color. #2", t => {
-	t.deepEqual(lighten("#ddaced"), "#eacdf4");
+	t.deepEqual(lighten("#ddaced"), "#eed5f6");
 });
 
 test("#lighten() => Returns a less lightened version of a given hex color for negative values. #1", t => {
-	t.deepEqual(lighten("#af0", -10), "#99e600");
+	t.deepEqual(lighten("#af0", -10), "#88cc00");
 });
 
 test("#lighten() => Returns a less lightened version of a given hex color for negative values. #2", t => {
-	t.deepEqual(lighten("#ddaced", -90), "#1b0721");
+	t.deepEqual(lighten("#ddaced", -30), "#a82ed1");
 });
 
 test("#isLight() => correctly determines bright from dark colors, no matter the input. #1", t => {
